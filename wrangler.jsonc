@@ -10,4 +10,5 @@
     // /about/ serves about/index.html; /about redirects to /about/.
     "html_handling": "auto-trailing-slash",
   },
+  "previews": {}
 }
