@@ -21,7 +21,9 @@ export type IconName =
   | "lock"
   | "target"
   | "message"
-  | "file-text";
+  | "file-text"
+  | "pause"
+  | "play";
 
 interface Props {
   name: IconName;
@@ -69,6 +71,8 @@ const { name, size = 20 } = Astro.props;
   {name === "close" && <path d="M6 6l12 12M18 6 6 18" />}
   {name === "arrow-right" && <path d="M5 12h14M13 6l6 6-6 6" />}
   {name === "message" && <path d="M4 5h16v11H10l-5 4v-4H4z" />}
+  {name === "pause" && <path d="M9 6v12M15 6v12" />}
+  {name === "play" && <path d="M8 5v14l11-7z" />}
   {name === "file-text" && <path d="M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 16h6" />}
   {name === "clipboard-check" && (
     <>

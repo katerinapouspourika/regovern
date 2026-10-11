@@ -9,10 +9,12 @@ import facadeImage from "@/assets/placeholders/hero.jpg";
 import officeImage from "@/assets/placeholders/office.jpg";
 import skylineImage from "@/assets/placeholders/skyline.jpg";
 import Button from "@/components/Button.astro";
+import HeroBackground from "@/components/HeroBackground.astro";
 import CtaBand from "@/components/CtaBand.astro";
 import Icon, { type IconName } from "@/components/Icon.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import StatCounter from "@/components/StatCounter.astro";
+import { heroVideo } from "@/data/hero";
 import { services } from "@/data/services";
 import {
   formatNumber,
@@ -65,16 +67,8 @@ const latestPosts = (await getPosts(locale)).slice(0, 2);
   description={t("home.meta.description")}
 >
   <section class="hero" aria-labelledby="hero-title">
-    {/* TODO(content): replace with a real photo (see src/assets/placeholders/README.md). */}
-    <Image
-      class="hero-image"
-      src={skylineImage}
-      alt=""
-      widths={[768, 1280, 1920, 2400]}
-      sizes="100vw"
-      loading="eager"
-      fetchpriority="high"
-    />
+    {/* TODO(content): replace the still and the video (src/data/hero.ts, docs/video.md). */}
+    <HeroBackground image={skylineImage} video={heroVideo} />
     <div class="container hero-inner">
       <h1 id="hero-title">
         {t("home.hero.title.before")}{" "}
@@ -249,19 +243,11 @@ const latestPosts = (await getPosts(locale)).slice(0, 2);
 
     /* Leave room for the panels that overlap the bottom edge. */
     @media (width >= 64rem) {
+      --hero-control-offset: calc(var(--space-32) + var(--space-12));
+
       min-block-size: 52rem;
       padding-block-end: calc(var(--space-32) + var(--space-16));
     }
-  }
-
-  .hero-image {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: cover;
-    object-position: 70% 50%;
   }
 
   .hero-inner {

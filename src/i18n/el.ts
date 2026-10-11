@@ -65,6 +65,8 @@ export const el = {
   "home.hero.title.highlight": "διαφάνεια",
   "home.hero.services": "Οι υπηρεσίες μας",
   "home.hero.contact": "Επικοινωνήστε μαζί μας",
+  "home.hero.video.pause": "Παύση βίντεο φόντου",
+  "home.hero.video.play": "Αναπαραγωγή βίντεο φόντου",
 
   "home.overview.eyebrow": "Σχετικά με τη ReGovern",
   "home.overview.title":

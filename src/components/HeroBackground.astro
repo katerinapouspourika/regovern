@@ -1,0 +1,140 @@
+---
+/*
+ * Full-bleed background for a hero: a still image, plus an optional muted,
+ * looping video that fades in over it once it plays. Place as the first child
+ * of a positioned hero (the script marks the hero with data-video-state). The
+ * hero can set --hero-control-offset to lift the pause button clear of
+ * anything overlapping its bottom edge.
+ */
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import Icon from "@/components/Icon.astro";
+import type { HeroVideo } from "@/data/hero";
+import { toLocale, useTranslations } from "@/i18n";
+
+interface Props {
+  image: ImageMetadata;
+  video?: HeroVideo | null;
+}
+
+const { image, video } = Astro.props;
+const t = useTranslations(toLocale(Astro.currentLocale));
+---
+
+<div class="hero-background" data-hero-background>
+  <Image
+    class="media"
+    src={image}
+    alt=""
+    widths={[768, 1280, 1920, 2400]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+  />
+  {video && (
+    <>
+      {/* Decorative: no autoplay attribute, the script decides whether to load it. */}
+      <video
+        class="media video"
+        muted
+        loop
+        playsinline
+        preload="none"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        {video.webm && <source src={video.webm} type="video/webm" />}
+        <source src={video.mp4} type="video/mp4" />
+      </video>
+    </>
+  )}
+</div>
+{video && (
+  <button
+    class="toggle"
+    type="button"
+    data-video-toggle
+    data-label-pause={t("home.hero.video.pause")}
+    data-label-play={t("home.hero.video.play")}
+    aria-label={t("home.hero.video.pause")}
+  >
+    <span class="icon-pause">
+      <Icon name="pause" size={18} />
+    </span>
+    <span class="icon-play">
+      <Icon name="play" size={18} />
+    </span>
+  </button>
+)}
+
+<script>
+  import { setupHeroVideo } from "@/scripts/hero-video";
+
+  document
+    .querySelectorAll<HTMLElement>("[data-hero-background]")
+    .forEach((background) => {
+      if (background.parentElement) setupHeroVideo(background.parentElement);
+    });
+</script>
+
+<style>
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .media {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: 70% 50%;
+  }
+
+  .video {
+    opacity: 0;
+    transition: opacity 800ms ease;
+  }
+
+  :global([data-video-state]) .video {
+    opacity: 1;
+  }
+
+  /* Hidden until the video actually plays. */
+  .toggle {
+    position: absolute;
+    inset-block-end: var(--hero-control-offset, var(--space-6));
+    inset-inline-end: var(--container-gutter);
+    z-index: 1;
+    display: none;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    color: var(--color-ink);
+    cursor: pointer;
+    background: rgb(255 255 255 / 80%);
+    border: 1px solid rgb(255 255 255 / 70%);
+    border-radius: 50%;
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(10px);
+  }
+
+  :global([data-video-state]) .toggle {
+    display: grid;
+  }
+
+  .icon-pause {
+    display: contents;
+  }
+
+  .icon-play,
+  :global([data-video-state="paused"]) .icon-pause {
+    display: none;
+  }
+
+  :global([data-video-state="paused"]) .icon-play {
+    display: contents;
+  }
+</style>
