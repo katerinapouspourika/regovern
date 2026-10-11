@@ -1,0 +1,13 @@
+// Cloudflare Workers configuration: serves the static build in dist/.
+// Setup and preview links are explained in docs/hosting.md.
+{
+  "name": "regovern",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // Unknown URLs get dist/404.html with a 404 status.
+    "not_found_handling": "404-page",
+    // /about/ serves about/index.html; /about redirects to /about/.
+    "html_handling": "auto-trailing-slash",
+  },
+}
