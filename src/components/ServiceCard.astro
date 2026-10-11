@@ -1,0 +1,84 @@
+---
+import Icon, { type IconName } from "@/components/Icon.astro";
+
+interface Props {
+  icon: IconName;
+  title: string;
+  summary: string;
+  href: string;
+  linkText: string;
+}
+
+const { icon, title, summary, href, linkText } = Astro.props;
+---
+
+<article class="service-card">
+  <span class="icon">
+    <Icon name={icon} size={28} />
+  </span>
+  <h3>{title}</h3>
+  <p>{summary}</p>
+  {/* The whole card is clickable; the visible link text stays for sighted users. */}
+  <a href={href}>
+    {linkText}
+    <span class="visually-hidden">: {title}</span>
+    <Icon name="arrow-right" size={18} />
+  </a>
+</article>
+
+<style>
+  .service-card {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: var(--space-3);
+    padding: var(--space-8) var(--space-6);
+    background: var(--color-white);
+    border-block-start: 3px solid var(--color-gold-500);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: translate var(--duration-base);
+
+    &:hover {
+      translate: 0 -0.25rem;
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .icon {
+    display: grid;
+    place-items: center;
+    inline-size: 3.5rem;
+    block-size: 3.5rem;
+    color: var(--color-gold-700);
+    background: var(--color-surface);
+    border-radius: 50%;
+  }
+
+  p {
+    color: var(--color-text-muted);
+  }
+
+  a {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    font-weight: 600;
+    text-decoration: none;
+
+    /* Stretch the link over the card. */
+    &::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+</style>

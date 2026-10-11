@@ -55,12 +55,73 @@ export const en: UiStrings = {
   "cookies.accept": "Accept",
   "cookies.reject": "Reject",
 
-  // TODO(content): real home page title, description and hero text.
-  "home.meta.title": "ReGovern | Internal audit",
+  // TODO(content): real home page text.
+  "home.meta.title": "ReGovern | Internal audit and corporate governance",
   "home.meta.description":
     "ReGovern provides internal audit, risk management and regulatory compliance services in Greece.",
+  "home.hero.eyebrow": "Internal audit · Compliance · Governance",
   "home.hero.title.before": "Internal audit built on",
   "home.hero.title.highlight": "transparency",
   "home.hero.subtitle":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "home.hero.services": "Our services",
+  "home.hero.contact": "Contact us",
+
+  "home.services.heading": "Our services",
+
+  "home.overview.eyebrow": "About ReGovern",
+  "home.overview.title": "A trusted partner for audit and governance",
+  "home.overview.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "home.overview.link": "More about us",
+  "home.overview.imageAlt": "Glass facade of an office building",
+  "home.stats.label": "ReGovern in numbers",
+  "home.stats.years": "years of experience",
+  "home.stats.audits": "audits completed",
+  "home.stats.clients": "clients",
+
+  "home.why.eyebrow": "Why ReGovern",
+  "home.why.title": "Why choose us",
+  "home.why.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "home.why.independence.title": "Independence",
+  "home.why.independence.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+  "home.why.experience.title": "Experience",
+  "home.why.experience.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+  "home.why.confidentiality.title": "Confidentiality",
+  "home.why.confidentiality.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+  "home.why.tailored.title": "Tailored solutions",
+  "home.why.tailored.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+
+  "home.blog.eyebrow": "Blog",
+  "home.blog.title": "Latest articles",
+  "home.blog.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "home.blog.all": "All articles",
+
+  "cta.title": "Book an introductory meeting",
+  "cta.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Talk to us about what your business needs.",
+  "cta.button": "Book a meeting",
+
+  // TODO(content): real service names and summaries.
+  "services.internalAudit.title": "Internal audit",
+  "services.internalAudit.summary":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "services.risk.title": "Risk management",
+  "services.risk.summary":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "services.compliance.title": "Regulatory compliance",
+  "services.compliance.summary":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "services.governance.title": "Governance advisory",
+  "services.governance.summary":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "services.more": "Learn more",
+
+  "blog.readMore": "Read more",
 };

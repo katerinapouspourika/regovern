@@ -3,63 +3,461 @@
  * Home page body, shared by the Greek (src/pages/index.astro) and English
  * (src/pages/en/index.astro) routes. The language comes from the URL.
  */
+import { Image } from "astro:assets";
+import heroImage from "@/assets/placeholders/hero.jpg";
+import officeImage from "@/assets/placeholders/office.jpg";
+import BlogCard from "@/components/BlogCard.astro";
+import Button from "@/components/Button.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon, { type IconName } from "@/components/Icon.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ServiceCard from "@/components/ServiceCard.astro";
+import StatCounter from "@/components/StatCounter.astro";
+import { services } from "@/data/services";
+import {
+  formatNumber,
+  localizePath,
+  toLocale,
+  useTranslations,
+  type UiKey,
+} from "@/i18n";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { toLocale, useTranslations } from "@/i18n";
+import { getPosts, postPath } from "@/utils/blog";
 
 const locale = toLocale(Astro.currentLocale);
 const t = useTranslations(locale);
+
+// TODO(content): real figures.
+const stats: readonly { value: number; label: UiKey }[] = [
+  { value: 15, label: "home.stats.years" },
+  { value: 350, label: "home.stats.audits" },
+  { value: 80, label: "home.stats.clients" },
+];
+
+const reasons: readonly { icon: IconName; title: UiKey; text: UiKey }[] = [
+  {
+    icon: "compass",
+    title: "home.why.independence.title",
+    text: "home.why.independence.text",
+  },
+  {
+    icon: "award",
+    title: "home.why.experience.title",
+    text: "home.why.experience.text",
+  },
+  {
+    icon: "lock",
+    title: "home.why.confidentiality.title",
+    text: "home.why.confidentiality.text",
+  },
+  {
+    icon: "target",
+    title: "home.why.tailored.title",
+    text: "home.why.tailored.text",
+  },
+];
+
+const latestPosts = (await getPosts(locale)).slice(0, 3);
 ---
 
 <BaseLayout
   title={t("home.meta.title")}
   description={t("home.meta.description")}
 >
-  {/* TODO(content): placeholder hero until the home page is built (build step 3). */}
-  <section class="hero">
+  <section class="hero" aria-labelledby="hero-title">
+    {/* TODO(content): replace with a real photo (see src/assets/placeholders/README.md). */}
+    <Image
+      class="hero-image"
+      src={heroImage}
+      alt=""
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
     <div class="container hero-inner">
-      <p class="eyebrow">{t("site.name")}</p>
-      <h1>
+      <p class="eyebrow">{t("home.hero.eyebrow")}</p>
+      <h1 id="hero-title">
         {t("home.hero.title.before")}{" "}
         <span class="highlight">{t("home.hero.title.highlight")}</span>
       </h1>
       <p class="subtitle">{t("home.hero.subtitle")}</p>
+      <div class="actions">
+        <Button href={localizePath("/services/", locale)}>
+          {t("home.hero.services")}
+        </Button>
+        <Button
+          href={localizePath("/contact/", locale)}
+          variant="outline-light"
+        >
+          {t("home.hero.contact")}
+        </Button>
+      </div>
     </div>
   </section>
+
+  <section class="services" aria-labelledby="services-title">
+    <div class="container">
+      <h2 id="services-title" class="visually-hidden">
+        {t("home.services.heading")}
+      </h2>
+      <ul class="service-grid">
+        {services.map((service) => (
+          <li>
+            <ServiceCard
+              icon={service.icon}
+              title={t(service.title)}
+              summary={t(service.summary)}
+              href={`${localizePath("/services/", locale)}#${service.id}`}
+              linkText={t("services.more")}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="overview" aria-labelledby="overview-title">
+    <div class="container overview-inner">
+      <div class="overview-text">
+        <SectionHeading
+          id="overview-title"
+          eyebrow={t("home.overview.eyebrow")}
+          title={t("home.overview.title")}
+          align="start"
+        />
+        <p>{t("home.overview.text")}</p>
+        <dl class="stats" aria-label={t("home.stats.label")}>
+          {stats.map(({ value, label }) => (
+            <StatCounter
+              value={`+${formatNumber(value, locale)}`}
+              label={t(label)}
+            />
+          ))}
+        </dl>
+        <Button href={localizePath("/about/", locale)} variant="outline-dark">
+          {t("home.overview.link")}
+        </Button>
+      </div>
+      <div class="overview-media">
+        {/* TODO(content): replace with a real photo (see src/assets/placeholders/README.md). */}
+        <Image
+          src={officeImage}
+          alt={t("home.overview.imageAlt")}
+          widths={[480, 960]}
+          sizes="(min-width: 64rem) 34rem, 100vw"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="why" aria-labelledby="why-title">
+    <div class="container">
+      <SectionHeading
+        id="why-title"
+        eyebrow={t("home.why.eyebrow")}
+        title={t("home.why.title")}
+        subtitle={t("home.why.subtitle")}
+        tone="light"
+      />
+      <ul class="reasons">
+        {reasons.map(({ icon, title, text }) => (
+          <li>
+            <span class="reason-icon">
+              <Icon name={icon} size={32} />
+            </span>
+            <h3>{t(title)}</h3>
+            <p>{t(text)}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {latestPosts.length > 0 && (
+    <section class="blog" aria-labelledby="blog-title">
+      <div class="container">
+        <SectionHeading
+          id="blog-title"
+          eyebrow={t("home.blog.eyebrow")}
+          title={t("home.blog.title")}
+          subtitle={t("home.blog.subtitle")}
+        />
+        <ul class="post-grid">
+          {latestPosts.map((post) => (
+            <li>
+              <BlogCard
+                href={localizePath(postPath(post), locale)}
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.date}
+                cover={post.data.cover}
+                coverAlt={post.data.coverAlt}
+              />
+            </li>
+          ))}
+        </ul>
+        <div class="blog-all">
+          <Button href={localizePath("/blog/", locale)} variant="outline-dark">
+            {t("home.blog.all")}
+          </Button>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand />
 </BaseLayout>
 
 <style>
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  /* Hero: photo under a navy overlay so white text stays legible. */
   .hero {
     --color-focus: var(--color-gold-300);
 
-    padding-block: var(--space-24);
+    position: relative;
+    isolation: isolate;
+    padding-block: var(--space-24) var(--space-16);
     color: var(--color-white);
     background: var(--color-navy-900);
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      content: "";
+      background: linear-gradient(
+        100deg,
+        rgb(19 40 71 / 95%) 0%,
+        rgb(19 40 71 / 80%) 55%,
+        rgb(19 40 71 / 55%) 100%
+      );
+    }
+
+    /* Leave room for the service cards that overlap the bottom edge. */
+    @media (width >= 64rem) {
+      padding-block: var(--space-24) calc(var(--space-24) + var(--space-16));
+    }
+  }
+
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
   }
 
   .hero-inner {
     display: grid;
     gap: var(--space-6);
+    justify-items: start;
   }
 
   .eyebrow {
     font-size: var(--font-size-sm);
     font-weight: 600;
     color: var(--color-gold-300);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
   }
 
   h1 {
-    max-inline-size: 20ch;
+    max-inline-size: 18ch;
     color: var(--color-white);
   }
 
   .highlight {
-    color: var(--color-gold-500);
+    color: var(--color-gold-300);
   }
 
   .subtitle {
-    max-inline-size: 60ch;
+    max-inline-size: 56ch;
     font-size: var(--font-size-lg);
     color: var(--color-surface);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-block-start: var(--space-2);
+  }
+
+  /* Service cards: stacked below the hero on small screens, overlapping it on large ones. */
+  .services {
+    padding-block: var(--space-12) var(--space-8);
+    background: var(--color-surface);
+
+    @media (width >= 64rem) {
+      padding-block: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0 50%,
+        var(--color-white) 50%
+      );
+    }
+  }
+
+  .service-grid {
+    display: grid;
+    gap: var(--space-6);
+
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(4, 1fr);
+      margin-block-start: calc(-1 * (var(--space-24) + var(--space-4)));
+    }
+
+    li {
+      display: grid;
+    }
+  }
+
+  .overview {
+    padding-block: var(--space-16) var(--space-24);
+  }
+
+  .overview-inner {
+    display: grid;
+    gap: var(--space-12);
+    align-items: center;
+
+    @media (width >= 64rem) {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+    }
+  }
+
+  .overview-text {
+    display: grid;
+    gap: var(--space-6);
+    justify-items: start;
+
+    > p {
+      color: var(--color-text-muted);
+    }
+
+    /* The grid gap already spaces the heading. */
+    > :global(.section-heading) {
+      margin-block-end: 0;
+    }
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    gap: var(--space-6);
+    inline-size: 100%;
+    margin: 0;
+  }
+
+  .overview-media {
+    --frame-offset: var(--space-2);
+
+    position: relative;
+    isolation: isolate;
+    margin-inline-end: var(--frame-offset);
+
+    @media (width >= 64rem) {
+      --frame-offset: var(--space-4);
+    }
+
+    /* Gold frame offset behind the photo. */
+    &::before {
+      position: absolute;
+      inset: var(--space-6) calc(-1 * var(--frame-offset))
+        calc(-1 * var(--frame-offset)) var(--space-6);
+      z-index: -1;
+      content: "";
+      border: 2px solid var(--color-gold-500);
+      border-radius: var(--radius-lg);
+    }
+
+    img {
+      inline-size: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+    }
+  }
+
+  .why {
+    --color-focus: var(--color-gold-300);
+
+    padding-block: var(--space-24);
+    color: var(--color-surface);
+    background: var(--color-navy-900);
+  }
+
+  .reasons {
+    display: grid;
+    gap: var(--space-12) var(--space-8);
+
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    li {
+      display: grid;
+      gap: var(--space-3);
+      justify-items: center;
+      text-align: center;
+    }
+
+    h3 {
+      color: var(--color-white);
+    }
+  }
+
+  .reason-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 4.5rem;
+    block-size: 4.5rem;
+    margin-block-end: var(--space-2);
+    color: var(--color-gold-300);
+    border: 1px solid var(--color-gold-500);
+    border-radius: 50%;
+  }
+
+  .blog {
+    padding-block: var(--space-24);
+    background: var(--color-surface);
+  }
+
+  .post-grid {
+    display: grid;
+    gap: var(--space-8);
+
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    li {
+      display: grid;
+    }
+  }
+
+  .blog-all {
+    display: flex;
+    justify-content: center;
+    margin-block-start: var(--space-12);
   }
 </style>
