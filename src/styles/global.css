@@ -255,6 +255,36 @@
     outline-offset: 2px;
   }
 
+  /* Centred content column with side gutters. */
+  .container {
+    inline-size: 100%;
+    max-inline-size: calc(var(--container-max) + 2 * var(--container-gutter));
+    padding-inline: var(--container-gutter);
+    margin-inline: auto;
+  }
+
+  main:focus {
+    outline: none;
+  }
+
+  /* First focusable element on every page; visible only when focused. */
+  .skip-link {
+    position: fixed;
+    inset-block-start: var(--space-2);
+    inset-inline-start: var(--space-2);
+    z-index: 30;
+    padding: var(--space-2) var(--space-4);
+    font-weight: 600;
+    color: var(--color-navy-900);
+    background: var(--color-gold-300);
+    border-radius: var(--radius);
+    translate: 0 -200%;
+
+    &:focus {
+      translate: 0;
+    }
+  }
+
   /* Hidden visually but still read by screen readers. */
   .visually-hidden {
     position: absolute;

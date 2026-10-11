@@ -4,44 +4,27 @@
  * (src/pages/en/index.astro) routes. The language comes from the URL.
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { localizePath, locales, toLocale, useTranslations } from "@/i18n";
+import { toLocale, useTranslations } from "@/i18n";
 
 const locale = toLocale(Astro.currentLocale);
 const t = useTranslations(locale);
-const otherLocales = locales.filter((lang) => lang !== locale);
 ---
 
 <BaseLayout
   title={t("home.meta.title")}
   description={t("home.meta.description")}
 >
-  <main>
-    {/* TODO(content): placeholder hero until the home page is built (build step 3). */}
-    <section class="hero">
-      <div class="hero-inner">
-        <p class="eyebrow">{t("site.name")}</p>
-        <h1>
-          {t("home.hero.title.before")}{" "}
-          <span class="highlight">{t("home.hero.title.highlight")}</span>
-        </h1>
-        <p class="subtitle">{t("home.hero.subtitle")}</p>
-        {/* Temporary language links until the header switcher exists (build step 2). */}
-        <ul class="languages" aria-label={t("language.switcher.label")}>
-          {otherLocales.map((lang) => (
-            <li>
-              <a
-                href={localizePath(Astro.url.pathname, lang)}
-                hreflang={lang}
-                lang={lang}
-              >
-                {t(`language.${lang}`)}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  </main>
+  {/* TODO(content): placeholder hero until the home page is built (build step 3). */}
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">{t("site.name")}</p>
+      <h1>
+        {t("home.hero.title.before")}{" "}
+        <span class="highlight">{t("home.hero.title.highlight")}</span>
+      </h1>
+      <p class="subtitle">{t("home.hero.subtitle")}</p>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -49,7 +32,6 @@ const otherLocales = locales.filter((lang) => lang !== locale);
     --color-focus: var(--color-gold-300);
 
     padding-block: var(--space-24);
-    padding-inline: var(--container-gutter);
     color: var(--color-white);
     background: var(--color-navy-900);
   }
@@ -57,8 +39,6 @@ const otherLocales = locales.filter((lang) => lang !== locale);
   .hero-inner {
     display: grid;
     gap: var(--space-6);
-    max-inline-size: var(--container-max);
-    margin-inline: auto;
   }
 
   .eyebrow {
@@ -81,17 +61,5 @@ const otherLocales = locales.filter((lang) => lang !== locale);
     max-inline-size: 60ch;
     font-size: var(--font-size-lg);
     color: var(--color-surface);
-  }
-
-  .languages {
-    display: flex;
-    gap: var(--space-4);
-    padding: 0;
-    margin: 0;
-    list-style: none;
-
-    a {
-      color: var(--color-gold-300);
-    }
   }
 </style>

@@ -1,0 +1,190 @@
+---
+import { Image } from "astro:assets";
+import wordmark from "@/assets/brand/wordmark.png";
+import Icon from "@/components/Icon.astro";
+import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
+import { mainNav } from "@/data/navigation";
+import { localizePath, stripLocale, toLocale, useTranslations } from "@/i18n";
+
+const locale = toLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const currentPath = stripLocale(Astro.url.pathname);
+
+/** Home matches only itself; other items also match their sub-pages (blog posts). */
+function isCurrent(path: string): boolean {
+  return path === "/" ? currentPath === "/" : currentPath.startsWith(path);
+}
+---
+
+<header class="site-header">
+  <div class="container inner">
+    <a class="brand" href={localizePath("/", locale)}>
+      <Image
+        src={wordmark}
+        alt={t("header.home.label")}
+        height={32}
+        densities={[1, 2]}
+        loading="eager"
+      />
+    </a>
+
+    {/* The mobile menu is a native popover: no JavaScript, Esc and outside clicks close it. */}
+    <button class="menu-button" type="button" popovertarget="site-menu">
+      <Icon name="menu" size={24} />
+      {t("menu.open")}
+    </button>
+
+    <div class="menu" id="site-menu" popover>
+      <button
+        class="menu-button close"
+        type="button"
+        popovertarget="site-menu"
+        popovertargetaction="hide"
+      >
+        <Icon name="close" size={24} />
+        <span class="visually-hidden">{t("menu.close")}</span>
+      </button>
+      <nav aria-label={t("nav.label")}>
+        <ul class="nav-list">
+          {mainNav.map(({ label, path }) => (
+            <li>
+              <a
+                href={localizePath(path, locale)}
+                aria-current={isCurrent(path) ? "page" : undefined}
+              >
+                {t(label)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <LanguageSwitcher />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 10;
+    background: var(--color-white);
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .inner {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    justify-content: space-between;
+    min-block-size: 4.5rem;
+  }
+
+  .brand {
+    flex-shrink: 0;
+
+    img {
+      inline-size: auto;
+      block-size: 1.75rem;
+
+      @media (width >= 48rem) {
+        block-size: 2rem;
+      }
+    }
+  }
+
+  .menu-button {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    min-block-size: 2.75rem;
+    padding-inline: var(--space-3);
+    font-weight: 600;
+    color: var(--color-navy-900);
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+
+    @media (width >= 64rem) {
+      display: none;
+    }
+  }
+
+  .close {
+    justify-self: end;
+    padding-inline: var(--space-2);
+  }
+
+  /* Mobile: a panel that drops down from the top of the screen. */
+  .menu {
+    &:popover-open {
+      display: grid;
+      gap: var(--space-6);
+      justify-items: start;
+      inline-size: 100%;
+      max-inline-size: none;
+      max-block-size: 100dvh;
+      padding: var(--space-4) var(--container-gutter) var(--space-8);
+      margin: 0;
+      overflow-y: auto;
+      color: var(--color-text);
+      background: var(--color-white);
+      border: 0;
+      box-shadow: var(--shadow-card);
+      inset: 0 0 auto;
+    }
+
+    &::backdrop {
+      background: rgb(19 40 71 / 50%);
+    }
+
+    /* Desktop: always visible inline, whatever the popover state. */
+    @media (width >= 64rem) {
+      position: static;
+      display: flex;
+      gap: var(--space-8);
+      align-items: center;
+      inline-size: auto;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+      color: inherit;
+      background: none;
+      border: 0;
+    }
+  }
+
+  .nav-list {
+    display: grid;
+    gap: var(--space-1);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    @media (width >= 64rem) {
+      display: flex;
+      gap: var(--space-6);
+    }
+
+    a {
+      display: block;
+      padding-block: var(--space-2);
+      font-size: var(--font-size-lg);
+      font-weight: 500;
+      color: var(--color-navy-900);
+      text-decoration: none;
+      border-block-end: 2px solid transparent;
+      transition: border-color var(--duration-fast);
+
+      @media (width >= 64rem) {
+        font-size: var(--font-size-base);
+      }
+
+      &:hover,
+      &[aria-current="page"] {
+        border-color: var(--color-gold-500);
+      }
+    }
+  }
+</style>
