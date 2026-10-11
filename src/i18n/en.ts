@@ -64,6 +64,8 @@ export const en: UiStrings = {
   "home.hero.title.highlight": "transparency",
   "home.hero.services": "Our services",
   "home.hero.contact": "Contact us",
+  "home.hero.video.pause": "Pause background video",
+  "home.hero.video.play": "Play background video",
 
   "home.overview.eyebrow": "About ReGovern",
   "home.overview.title": "A trusted partner for audit and governance",

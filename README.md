@@ -34,6 +34,7 @@ npm run preview   # serves dist/
 | `src/i18n/`                                    | Languages (`config.ts`), UI strings (`el.ts`, `en.ts`) and helpers (`index.ts`).                   |
 | `src/styles/global.css`                        | Fonts, reset, design tokens and base styles.                                                       |
 | `public/fonts/`                                | Self-hosted fonts. See [docs/fonts.md](docs/fonts.md).                                             |
+| `public/video/`                                | Hero background video. See [docs/video.md](docs/video.md).                                         |
 | `src/assets/brand/`                            | Logo files. See **Logo** in the brief.                                                             |
 
 ## Branches
