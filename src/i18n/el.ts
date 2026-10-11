@@ -124,6 +124,36 @@ export const el = {
   "services.governance.summary":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
   "services.more": "Περισσότερα",
+  "services.meta.title": "Υπηρεσίες | ReGovern",
+  "services.meta.description":
+    "Εσωτερικός έλεγχος, διαχείριση κινδύνων, κανονιστική συμμόρφωση και συμβουλευτική διακυβέρνησης από τη ReGovern.",
+  "services.hero.title": "Οι υπηρεσίες μας",
+  "services.hero.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+  "services.overview.title": "Τι προσφέρουμε",
+  "services.offers": "Τι περιλαμβάνει",
+  "services.internalAudit.description":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+  "services.internalAudit.point1": "Lorem ipsum dolor sit amet",
+  "services.internalAudit.point2": "Consectetur adipiscing elit",
+  "services.internalAudit.point3": "Sed do eiusmod tempor incididunt",
+  "services.risk.description":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+  "services.risk.point1": "Lorem ipsum dolor sit amet",
+  "services.risk.point2": "Consectetur adipiscing elit",
+  "services.risk.point3": "Sed do eiusmod tempor incididunt",
+  "services.compliance.description":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+  "services.compliance.point1": "Lorem ipsum dolor sit amet",
+  "services.compliance.point2": "Consectetur adipiscing elit",
+  "services.compliance.point3": "Sed do eiusmod tempor incididunt",
+  "services.governance.description":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+  "services.governance.point1": "Lorem ipsum dolor sit amet",
+  "services.governance.point2": "Consectetur adipiscing elit",
+  "services.governance.point3": "Sed do eiusmod tempor incididunt",
+
+  "breadcrumb.label": "Διαδρομή πλοήγησης",
 
   "blog.readMore": "Διαβάστε περισσότερα",
 } as const;

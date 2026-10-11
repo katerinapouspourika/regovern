@@ -1,0 +1,115 @@
+---
+/*
+ * Short banner at the top of inner pages: breadcrumb, title and subtitle
+ * over the hero photo.
+ */
+import { Image } from "astro:assets";
+import heroImage from "@/assets/placeholders/hero.jpg";
+import { localizePath, toLocale, useTranslations } from "@/i18n";
+
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+const locale = toLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<section class="page-hero" aria-labelledby="page-title">
+  {/* TODO(content): replace with a real photo (see src/assets/placeholders/README.md). */}
+  <Image
+    class="background"
+    src={heroImage}
+    alt=""
+    widths={[768, 1280, 1920]}
+    sizes="100vw"
+    loading="eager"
+  />
+  <div class="container inner">
+    <nav aria-label={t("breadcrumb.label")}>
+      <ol class="breadcrumb">
+        <li>
+          <a href={localizePath("/", locale)}>{t("nav.home")}</a>
+        </li>
+        <li aria-current="page">{title}</li>
+      </ol>
+    </nav>
+    <h1 id="page-title">{title}</h1>
+    {subtitle && <p class="subtitle">{subtitle}</p>}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    --color-focus: var(--color-gold-300);
+
+    position: relative;
+    isolation: isolate;
+    padding-block: var(--space-16);
+    color: var(--color-white);
+    background: var(--color-navy-900);
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      content: "";
+      background: linear-gradient(
+        100deg,
+        rgb(19 40 71 / 95%) 0%,
+        rgb(19 40 71 / 75%) 100%
+      );
+    }
+
+    @media (width >= 64rem) {
+      padding-block: var(--space-24) var(--space-16);
+    }
+  }
+
+  .background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  .inner {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-gold-300);
+    list-style: none;
+
+    li + li::before {
+      margin-inline-end: var(--space-2);
+      color: var(--color-surface);
+      content: "/";
+    }
+
+    a {
+      color: var(--color-surface);
+    }
+  }
+
+  h1 {
+    color: var(--color-white);
+  }
+
+  .subtitle {
+    max-inline-size: 56ch;
+    font-size: var(--font-size-lg);
+    color: var(--color-surface);
+  }
+</style>
