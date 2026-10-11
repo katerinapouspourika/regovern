@@ -21,7 +21,7 @@ Decisions and design direction agreed so far. Update this file whenever a decisi
 | **Privacy Policy** | GDPR privacy notice (placeholder text marked for legal review). |
 | **Cookie Policy** | Explains the cookies used. |
 
-Shared components: top contact bar, header with logo and nav, footer (logo, short description, nav links, contact details, company legal details, links to the privacy and cookie policies), cookie banner, page hero banner, section heading, service card, stat counter, blog card, call-to-action band.
+Shared components: top contact bar, header with logo, nav and language switcher, footer (logo, short description, nav links, contact details, company legal details, links to the privacy and cookie policies), cookie banner, page hero banner, section heading, service card, stat counter, blog card, call-to-action band.
 
 ## Design direction
 
@@ -63,9 +63,24 @@ Contrast rule: gold works on navy and as a button fill with navy text, but gold 
 
 ### Typography
 
-- Headings: a serif (DM Serif Display or Source Serif 4) for an authoritative tone, as in references 02 and 04.
-- Body: Inter.
-- Both self-hosted.
+- Headings: a serif for an authoritative tone, as in references 02 and 04. It **must include Greek glyphs**: Source Serif 4 or Noto Serif Display. (DM Serif Display has no Greek, so it is ruled out.)
+- Body: Inter (includes Greek).
+- Both self-hosted, including the Greek subsets.
+- Do not use `text-transform: uppercase` on Greek text without `lang="el"` set on the page: Greek capitals drop their accent marks (tonos), and browsers only do this correctly when they know the language. Prefer sentence-case headings.
+
+## Languages
+
+The site is bilingual: **Greek and English**, with every page, component and legal text in both.
+
+- Astro's built-in i18n routing. **Greek is the default language at `/`** (for example `/services`); English lives under `/en/` (for example `/en/services`). Page slugs stay in English in both languages so the URLs mirror each other.
+- A language switcher in the header links to the same page in the other language, not to the home page.
+- Each page sets `<html lang="el">` or `<html lang="en">` and adds `hreflang` alternate links for both languages plus `x-default`.
+- UI strings (nav labels, buttons, form labels, footer, cookie banner) live in one translation file per language under `src/i18n/`; components never hard-code text.
+- Blog posts live in `src/content/blog/el/` and `src/content/blog/en/`. A post may exist in only one language; the blog list shows only that language's posts, and the switcher on such a post goes to the other language's blog list.
+- Dates and numbers are formatted per language (`Intl.DateTimeFormat('el-GR')` / `'en-GB'`).
+- Placeholder text: short Greek and English placeholder headings and lorem ipsum body text, marked `TODO(content):`.
+- The cookie banner, privacy policy, cookie policy and contact form consent text are needed in both languages.
+- Greek text often runs about 20–30% longer than English. Check buttons, nav items and cards in Greek, not only English.
 
 ### Photography
 
@@ -81,7 +96,7 @@ Placeholder photos come from free stock libraries (Unsplash, Pexels): architectu
 ## Open questions
 
 - [ ] Final brand colours and fonts, from the logo file. **Owner will add the logo to the repo.**
-- [ ] Language: English only, Greek only, or both (Astro supports Greek and English versions of each page)?
+- [x] Language: both Greek (default) and English. See **Languages**.
 - [ ] Real content: page text, services list, team, stats, contact details, address, legal company details, starter blog posts, photos.
 - [ ] Contact form service (Formspree, Web3Forms, Netlify Forms) and the receiving inbox. After approval.
 - [ ] Hosting (Netlify, Cloudflare Pages, GitHub Pages) and domain. After approval.
