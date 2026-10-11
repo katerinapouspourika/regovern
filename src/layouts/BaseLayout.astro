@@ -9,6 +9,7 @@ import {
   locales,
   toLocale,
   useTranslations,
+  type Locale,
 } from "@/i18n";
 
 interface Props {
@@ -18,20 +19,50 @@ interface Props {
   description: string;
   /** For pages that must not be indexed or linked as alternates (404). */
   noindex?: boolean;
+  /**
+   * The page's real translations, as localised paths, for pages that do not
+   * exist in every language (blog posts). Defaults to the same path in each
+   * language.
+   */
+  alternates?: Partial<Record<Locale, string>>;
+  /**
+   * Language-neutral path the language switcher uses for a language missing
+   * from `alternates`, such as "/blog/".
+   */
+  languageFallback?: string;
 }
 
-const { title, description, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  noindex = false,
+  alternates: alternatePaths,
+  languageFallback = "/",
+} = Astro.props;
 const locale = toLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const site = Astro.site ?? Astro.url;
 const absolute = (path: string) => new URL(path, site).href;
 
 const canonical = absolute(localizePath(Astro.url.pathname, locale));
-const alternates = locales.map((lang) => ({
-  lang,
-  href: absolute(localizePath(Astro.url.pathname, lang)),
-}));
-const defaultHref = absolute(localizePath(Astro.url.pathname, defaultLocale));
+const pathIn = (lang: Locale): string | undefined =>
+  alternatePaths
+    ? alternatePaths[lang]
+    : localizePath(Astro.url.pathname, lang);
+
+const alternates = locales.flatMap((lang) => {
+  const path = pathIn(lang);
+  return path ? [{ lang, href: absolute(path) }] : [];
+});
+const defaultHref =
+  alternates.find(({ lang }) => lang === defaultLocale)?.href ??
+  alternates[0]?.href;
+const languageHrefs = Object.fromEntries(
+  locales.map((lang) => [
+    lang,
+    pathIn(lang) ?? localizePath(languageFallback, lang),
+  ]),
+) as Record<Locale, string>;
 
 // Preload the fonts for the page's main script; the rest load on demand.
 const script = locale === "el" ? "greek" : "latin";
@@ -56,7 +87,9 @@ const preloadFonts = [
         {alternates.map(({ lang, href }) => (
           <link rel="alternate" hreflang={lang} href={href} />
         ))}
-        <link rel="alternate" hreflang="x-default" href={defaultHref} />
+        {defaultHref && (
+          <link rel="alternate" hreflang="x-default" href={defaultHref} />
+        )}
       </>
     )}
     {preloadFonts.map((href) => (
@@ -70,7 +103,7 @@ const preloadFonts = [
     <a class="skip-link" href="#main">
       {t("skip.link")}
     </a>
-    <Header />
+    <Header languageHrefs={languageHrefs} />
     <main id="main" tabindex="-1">
       <slot />
     </main>

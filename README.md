@@ -18,7 +18,7 @@ npm run build     # type-checks and builds the static site into dist/
 npm run preview   # serves dist/
 ```
 
-Hosting and live previews: [docs/hosting.md](docs/hosting.md) (Cloudflare).
+Hosting and live previews: [docs/hosting.md](docs/hosting.md) (Cloudflare). Writing blog posts: [docs/blog.md](docs/blog.md).
 
 ## Project structure
 
