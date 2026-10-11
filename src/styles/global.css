@@ -122,11 +122,21 @@
     /* Light-only site: dark sections are fixed by design, not by the visitor's theme. */
     color-scheme: light;
 
-    /* Colours. TODO(content): sample final values from the logo file. */
-    --color-navy-900: #0b1f3a;
-    --color-navy-700: #1c2e4a;
-    --color-gold-500: #c9a227;
-    --color-gold-300: #e3c770;
+    /*
+     * Colours sampled from the logo (src/assets/brand/). Navy is the logo navy;
+     * the golds are the dark end, middle and light end of its gold gradient.
+     */
+    --color-navy-900: #132847;
+    --color-navy-700: #213b60;
+    --color-gold-700: #a07b38;
+    --color-gold-500: #b48c49;
+    --color-gold-300: #e6c07f;
+    --gradient-gold: linear-gradient(
+      135deg,
+      var(--color-gold-300),
+      var(--color-gold-500) 55%,
+      var(--color-gold-700)
+    );
     --color-surface: #f4f6f9;
     --color-white: #fff;
     --color-text: #1e2733;
@@ -134,7 +144,7 @@
     --color-border: #dde2ea;
 
     /*
-     * Gold fails WCAG contrast as text or outline on white, so light
+     * Gold fails WCAG contrast as text on white (3.1:1 at best), so light
      * backgrounds use navy for focus rings; dark sections override it.
      */
     --color-focus: var(--color-navy-900);
