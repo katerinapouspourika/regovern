@@ -154,6 +154,55 @@ export const el = {
   "services.governance.point2": "Consectetur adipiscing elit",
   "services.governance.point3": "Sed do eiusmod tempor incididunt",
 
+  // TODO(content): real About us text, team members and bios.
+  "about.meta.title": "Σχετικά με εμάς | ReGovern",
+  "about.meta.description":
+    "Γνωρίστε τη ReGovern: την ιστορία μας, τις αξίες μας και την ομάδα που υποστηρίζει τον εσωτερικό έλεγχο της επιχείρησής σας.",
+  "about.hero.title": "Σχετικά με εμάς",
+  "about.hero.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+  "about.story.eyebrow": "Η ιστορία μας",
+  "about.story.title": "Ανεξάρτητη ματιά, μακροχρόνια συνεργασία",
+  "about.story.text1":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "about.story.text2":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "about.story.imageAlt": "Γυάλινη πρόσοψη κτιρίου γραφείων",
+  "about.values.eyebrow": "Οι αξίες μας",
+  "about.values.title": "Τι μας καθοδηγεί",
+  "about.values.independence.title": "Ανεξαρτησία",
+  "about.values.independence.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.values.integrity.title": "Ακεραιότητα",
+  "about.values.integrity.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.values.confidentiality.title": "Εχεμύθεια",
+  "about.values.confidentiality.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.values.excellence.title": "Αριστεία",
+  "about.values.excellence.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.team.eyebrow": "Η ομάδα μας",
+  "about.team.title": "Οι άνθρωποι πίσω από τη ReGovern",
+  "about.team.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.team.member1.name": "Όνομα Επώνυμο",
+  "about.team.member1.role": "Ιδρύτρια και Διευθύνουσα Σύμβουλος",
+  "about.team.member1.bio":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.team.member2.name": "Όνομα Επώνυμο",
+  "about.team.member2.role": "Επικεφαλής Εσωτερικού Ελέγχου",
+  "about.team.member2.bio":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.team.member3.name": "Όνομα Επώνυμο",
+  "about.team.member3.role": "Υπεύθυνη Κανονιστικής Συμμόρφωσης",
+  "about.team.member3.bio":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.team.member4.name": "Όνομα Επώνυμο",
+  "about.team.member4.role": "Σύμβουλος Διαχείρισης Κινδύνων",
+  "about.team.member4.bio":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+
   "breadcrumb.label": "Διαδρομή πλοήγησης",
 
   "blog.readMore": "Διαβάστε περισσότερα",

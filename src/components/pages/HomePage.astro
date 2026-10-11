@@ -16,6 +16,7 @@ import SectionHeading from "@/components/SectionHeading.astro";
 import StatCounter from "@/components/StatCounter.astro";
 import { heroVideo } from "@/data/hero";
 import { services } from "@/data/services";
+import { stats } from "@/data/stats";
 import {
   formatNumber,
   localizePath,
@@ -28,13 +29,6 @@ import { getPosts, postPath } from "@/utils/blog";
 
 const locale = toLocale(Astro.currentLocale);
 const t = useTranslations(locale);
-
-// TODO(content): real figures.
-const stats: readonly { value: number; label: UiKey }[] = [
-  { value: 15, label: "home.stats.years" },
-  { value: 350, label: "home.stats.audits" },
-  { value: 80, label: "home.stats.clients" },
-];
 
 const steps: readonly { icon: IconName; title: UiKey; text: UiKey }[] = [
   {

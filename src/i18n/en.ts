@@ -152,6 +152,55 @@ export const en: UiStrings = {
   "services.governance.point2": "Consectetur adipiscing elit",
   "services.governance.point3": "Sed do eiusmod tempor incididunt",
 
+  // TODO(content): real About us text, team members and bios.
+  "about.meta.title": "About us | ReGovern",
+  "about.meta.description":
+    "Meet ReGovern: our story, our values and the team behind your internal audit.",
+  "about.hero.title": "About us",
+  "about.hero.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+  "about.story.eyebrow": "Our story",
+  "about.story.title": "An independent view, a lasting partnership",
+  "about.story.text1":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "about.story.text2":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "about.story.imageAlt": "Glass facade of an office building",
+  "about.values.eyebrow": "Our values",
+  "about.values.title": "What guides us",
+  "about.values.independence.title": "Independence",
+  "about.values.independence.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.values.integrity.title": "Integrity",
+  "about.values.integrity.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.values.confidentiality.title": "Confidentiality",
+  "about.values.confidentiality.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.values.excellence.title": "Excellence",
+  "about.values.excellence.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.team.eyebrow": "Our team",
+  "about.team.title": "The people behind ReGovern",
+  "about.team.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.team.member1.name": "Name Surname",
+  "about.team.member1.role": "Founder and Managing Director",
+  "about.team.member1.bio":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.team.member2.name": "Name Surname",
+  "about.team.member2.role": "Head of Internal Audit",
+  "about.team.member2.bio":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.team.member3.name": "Name Surname",
+  "about.team.member3.role": "Regulatory Compliance Lead",
+  "about.team.member3.bio":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+  "about.team.member4.name": "Name Surname",
+  "about.team.member4.role": "Risk Management Consultant",
+  "about.team.member4.bio":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+
   "breadcrumb.label": "Breadcrumb",
 
   "blog.readMore": "Read more",
