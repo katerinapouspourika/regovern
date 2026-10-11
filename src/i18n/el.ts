@@ -31,6 +31,39 @@ export const el = {
   "contact.email": "Email",
   "contact.address": "Διεύθυνση",
   "contact.hours": "Ώρες λειτουργίας",
+  // TODO(content): real Contact page text.
+  "contact.meta.title": "Επικοινωνία | ReGovern",
+  "contact.meta.description":
+    "Επικοινωνήστε με τη ReGovern για υπηρεσίες εσωτερικού ελέγχου, διαχείρισης κινδύνων και κανονιστικής συμμόρφωσης.",
+  "contact.hero.title": "Επικοινωνήστε μαζί μας",
+  "contact.hero.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+  "contact.form.title": "Στείλτε μας μήνυμα",
+  "contact.form.required": "Τα πεδία με * είναι υποχρεωτικά.",
+  "contact.form.name": "Ονοματεπώνυμο",
+  "contact.form.email": "Email",
+  "contact.form.phone": "Τηλέφωνο",
+  "contact.form.company": "Εταιρεία",
+  "contact.form.message": "Μήνυμα",
+  "contact.form.consent.before": "Έχω διαβάσει την",
+  "contact.form.consent.link": "πολιτική απορρήτου",
+  "contact.form.consent.after":
+    "και συμφωνώ να χρησιμοποιηθούν τα στοιχεία μου για την απάντηση στο μήνυμά μου.",
+  "contact.form.submit": "Αποστολή μηνύματος",
+  "contact.form.error.required": "Συμπληρώστε αυτό το πεδίο.",
+  "contact.form.error.email":
+    "Γράψτε μια έγκυρη διεύθυνση email, π.χ. onoma@etaireia.gr.",
+  "contact.form.error.consent":
+    "Για να στείλετε το μήνυμα, αποδεχτείτε την πολιτική απορρήτου.",
+  "contact.form.success.title": "Ευχαριστούμε για το μήνυμά σας",
+  "contact.form.success.text": "Θα επικοινωνήσουμε μαζί σας το συντομότερο.",
+  "contact.form.success.demo":
+    "Δοκιμαστική έκδοση: η φόρμα δεν στέλνει ακόμη μηνύματα.",
+  "contact.form.success.again": "Νέο μήνυμα",
+  "contact.details.title": "Στοιχεία επικοινωνίας",
+  "contact.map.open": "Άνοιγμα στους Χάρτες Google",
+  "contact.map.alt": "Χάρτης με τη θέση του γραφείου της ReGovern",
+  "link.newTab": "(ανοίγει σε νέα καρτέλα)",
 
   // TODO(content): real legal name, address and office hours.
   "company.legalName": "ReGovern Ι.Κ.Ε.",

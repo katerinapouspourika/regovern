@@ -1,0 +1,435 @@
+---
+/*
+ * Contact page body, shared by src/pages/contact.astro (Greek) and
+ * src/pages/en/contact.astro (English). The form does not send anywhere yet:
+ * submitting shows a placeholder thank-you message.
+ */
+import { Image } from "astro:assets";
+import mapImage from "@/assets/placeholders/map.jpg";
+import Icon from "@/components/Icon.astro";
+import PageHero from "@/components/PageHero.astro";
+import { company, emailHref, mapsHref, phoneHref } from "@/data/company";
+import { localizePath, toLocale, useTranslations } from "@/i18n";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const locale = toLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+// The Greek address is the one Google Maps knows.
+const mapLink = mapsHref(useTranslations("el")("company.address"));
+---
+
+<BaseLayout
+  title={t("contact.meta.title")}
+  description={t("contact.meta.description")}
+>
+  <PageHero
+    title={t("contact.hero.title")}
+    subtitle={t("contact.hero.subtitle")}
+  />
+
+  <section class="contact" aria-labelledby="form-title">
+    <div class="container contact-grid">
+      <div class="sheet">
+        <h2 id="form-title">{t("contact.form.title")}</h2>
+        <p class="required-note">{t("contact.form.required")}</p>
+
+        {/* TODO(functionality): set action/method for the chosen form service. */}
+        <form
+          class="form"
+          data-contact-form
+          data-msg-required={t("contact.form.error.required")}
+          data-msg-email={t("contact.form.error.email")}
+          data-msg-consent={t("contact.form.error.consent")}
+        >
+          <div class="field">
+            <label for="contact-name">
+              {t("contact.form.name")} <span aria-hidden="true">*</span>
+            </label>
+            <input id="contact-name" name="name" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="contact-email">
+              {t("contact.form.email")} <span aria-hidden="true">*</span>
+            </label>
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="contact-phone">{t("contact.form.phone")}</label>
+            <input
+              id="contact-phone"
+              name="phone"
+              type="tel"
+              autocomplete="tel"
+            />
+          </div>
+          <div class="field">
+            <label for="contact-company">{t("contact.form.company")}</label>
+            <input
+              id="contact-company"
+              name="company"
+              autocomplete="organization"
+            />
+          </div>
+          <div class="field wide">
+            <label for="contact-message">
+              {t("contact.form.message")} <span aria-hidden="true">*</span>
+            </label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="6"
+              required
+            ></textarea>
+          </div>
+          <div class="consent wide">
+            <input
+              id="contact-consent"
+              name="consent"
+              type="checkbox"
+              required
+            />
+            <label for="contact-consent">
+              {t("contact.form.consent.before")}{" "}
+              <a href={localizePath("/privacy/", locale)}>
+                {t("contact.form.consent.link")}
+              </a>{" "}
+              {t("contact.form.consent.after")}
+              <span aria-hidden="true">*</span>
+            </label>
+          </div>
+          <button class="submit wide" type="submit">
+            {t("contact.form.submit")}
+          </button>
+        </form>
+
+        <div class="success" data-contact-success tabindex="-1" hidden>
+          <span class="success-icon">
+            <Icon name="clipboard-check" size={32} />
+          </span>
+          <h3>{t("contact.form.success.title")}</h3>
+          <p>{t("contact.form.success.text")}</p>
+          <p class="demo">{t("contact.form.success.demo")}</p>
+          <button class="again" type="button" data-contact-again>
+            {t("contact.form.success.again")}
+          </button>
+        </div>
+      </div>
+
+      <aside class="details" aria-labelledby="details-title">
+        <h2 id="details-title">{t("contact.details.title")}</h2>
+        <ul class="detail-list">
+          <li>
+            <Icon name="phone" size={22} />
+            <span>
+              <span class="label">{t("contact.phone")}</span>
+              <a href={phoneHref}>{company.phone}</a>
+            </span>
+          </li>
+          <li>
+            <Icon name="mail" size={22} />
+            <span>
+              <span class="label">{t("contact.email")}</span>
+              <a href={emailHref}>{company.email}</a>
+            </span>
+          </li>
+          <li>
+            <Icon name="map-pin" size={22} />
+            <span>
+              <span class="label">{t("contact.address")}</span>
+              <address>{t("company.address")}</address>
+            </span>
+          </li>
+          <li>
+            <Icon name="clock" size={22} />
+            <span>
+              <span class="label">{t("contact.hours")}</span>
+              {t("company.hours")}
+            </span>
+          </li>
+        </ul>
+
+        {/* A static image and a plain link: no embedded map, so no cookies. */}
+        <a class="map" href={mapLink} target="_blank" rel="noopener noreferrer">
+          {/* TODO(content): replace with a static map of the real address. */}
+          <Image
+            src={mapImage}
+            alt={t("contact.map.alt")}
+            widths={[400, 800]}
+            sizes="(min-width: 64rem) 26rem, 100vw"
+          />
+          <span class="map-link">
+            {t("contact.map.open")}
+            <Icon name="arrow-right" size={18} />
+            <span class="visually-hidden">{t("link.newTab")}</span>
+          </span>
+        </a>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { setupContactForm } from "@/scripts/contact-form";
+
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+  const success = document.querySelector<HTMLElement>("[data-contact-success]");
+  if (form && success) setupContactForm(form, success);
+</script>
+
+<style>
+  .contact {
+    padding-block: var(--space-24);
+    background: var(--color-mist-500);
+  }
+
+  .contact-grid {
+    display: grid;
+    gap: var(--space-8);
+    align-items: start;
+
+    @media (width >= 64rem) {
+      grid-template-columns: 1.6fr 1fr;
+      gap: 0;
+    }
+  }
+
+  .sheet {
+    padding: var(--space-12) var(--space-6);
+    background: var(--color-white);
+    border-block-end: 2px solid var(--color-bronze-500);
+
+    @media (width >= 48rem) {
+      padding: var(--space-16);
+    }
+
+    h2 {
+      font-size: var(--font-size-2xl);
+    }
+  }
+
+  .required-note {
+    margin-block: var(--space-3) var(--space-8);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  .form {
+    display: grid;
+    gap: var(--space-6);
+
+    @media (width >= 40rem) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .wide {
+    grid-column: 1 / -1;
+  }
+
+  .field {
+    display: grid;
+    gap: var(--space-2);
+
+    label {
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+  }
+
+  input:not([type="checkbox"]),
+  textarea {
+    inline-size: 100%;
+    min-block-size: 3rem;
+    padding: var(--space-3) var(--space-4);
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: border-color var(--duration-fast);
+
+    &:hover {
+      border-color: var(--color-mist-500);
+    }
+
+    &:focus-visible {
+      background: var(--color-white);
+      border-color: var(--color-teal-700);
+    }
+
+    &:user-invalid {
+      border-color: var(--color-error);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  .consent {
+    display: flex;
+    gap: var(--space-3);
+    align-items: start;
+    font-size: var(--font-size-sm);
+
+    input {
+      flex-shrink: 0;
+      inline-size: 1.25rem;
+      block-size: 1.25rem;
+      margin-block-start: 0.1rem;
+      accent-color: var(--color-teal-700);
+    }
+
+    input:user-invalid {
+      outline: 2px solid var(--color-error);
+      outline-offset: 2px;
+    }
+  }
+
+  .submit,
+  .again {
+    justify-self: start;
+    min-block-size: 3rem;
+    padding: var(--space-3) var(--space-8);
+    font-weight: 500;
+    color: var(--color-white);
+    cursor: pointer;
+    background: var(--color-teal-700);
+    border: 0;
+    border-radius: var(--radius);
+    transition: background-color var(--duration-fast);
+
+    &:hover {
+      background: var(--color-ink);
+    }
+  }
+
+  .success {
+    display: grid;
+    gap: var(--space-4);
+    justify-items: start;
+    padding-block: var(--space-8);
+
+    &[hidden] {
+      display: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .success-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 4rem;
+    block-size: 4rem;
+    color: var(--color-teal-500);
+    background: var(--color-mist-200);
+    border-radius: 50%;
+  }
+
+  .demo {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-ink);
+    background: var(--color-mist-200);
+    border-radius: var(--radius);
+  }
+
+  /* Dark panel beside the form, as in reference 06. */
+  .details {
+    --color-focus: var(--color-teal-200);
+
+    display: grid;
+    gap: var(--space-8);
+    padding: var(--space-12) var(--space-6);
+    color: var(--color-on-dark);
+    background: var(--color-slate-800);
+
+    @media (width >= 48rem) {
+      padding: var(--space-12);
+    }
+
+    @media (width >= 64rem) {
+      margin-block-start: var(--space-12);
+    }
+
+    h2 {
+      font-size: var(--font-size-2xl);
+      color: var(--color-white);
+    }
+
+    a {
+      color: var(--color-white);
+    }
+  }
+
+  .detail-list {
+    display: grid;
+    gap: var(--space-6);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      display: flex;
+      gap: var(--space-4);
+      align-items: start;
+    }
+
+    svg {
+      flex-shrink: 0;
+      margin-block-start: 0.15rem;
+      color: var(--color-teal-200);
+    }
+
+    address {
+      font-style: normal;
+    }
+  }
+
+  .label {
+    display: block;
+    font-size: var(--font-size-sm);
+    color: var(--color-mist-500);
+  }
+
+  .map {
+    display: grid;
+    overflow: hidden;
+    text-decoration: none;
+    border-block-end: 2px solid var(--color-bronze-500);
+
+    img {
+      inline-size: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      transition: scale var(--duration-base);
+    }
+
+    &:hover img {
+      scale: 1.03;
+    }
+  }
+
+  .map-link {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-white);
+    background: var(--color-slate-700);
+  }
+</style>

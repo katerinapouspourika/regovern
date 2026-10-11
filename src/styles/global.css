@@ -144,6 +144,7 @@
     --color-text-muted: #545d63;
     --color-border: #dde2e5;
     --color-on-dark: #c7cfd4;
+    --color-error: #b42318;
 
     /*
      * Contrast (WCAG 2.2): teal 500 is 4.1:1 on white, so it is for large text
