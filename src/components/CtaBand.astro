@@ -7,40 +7,46 @@ const t = useTranslations(locale);
 ---
 
 <section class="cta" aria-labelledby="cta-title">
-  <div class="container inner">
-    <div>
-      <h2 id="cta-title">{t("cta.title")}</h2>
-      <p>{t("cta.text")}</p>
+  <div class="container">
+    <div class="panel">
+      <div>
+        <h2 id="cta-title">{t("cta.title")}</h2>
+        <p>{t("cta.text")}</p>
+      </div>
+      <Button href={localizePath("/contact/", locale)} variant="accent">
+        {t("cta.button")}
+      </Button>
     </div>
-    <Button href={localizePath("/contact/", locale)}>{t("cta.button")}</Button>
   </div>
 </section>
 
 <style>
   .cta {
-    --color-focus: var(--color-gold-300);
-
-    padding-block: var(--space-16);
-    color: var(--color-surface);
-    background:
-      radial-gradient(circle at 85% 0%, rgb(180 140 73 / 25%), transparent 45%),
-      var(--color-navy-700);
+    padding-block: var(--space-24);
   }
 
-  .inner {
+  .panel {
+    --color-focus: var(--color-teal-200);
+
     display: grid;
-    gap: var(--space-6);
+    gap: var(--space-8);
     justify-items: start;
+    padding: var(--space-12) var(--space-8);
+    color: var(--color-on-dark);
+    background: var(--color-slate-800);
+    border-block-end: 2px solid var(--color-bronze-500);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 
     @media (width >= 48rem) {
       grid-template-columns: 1fr auto;
       gap: var(--space-12);
       align-items: center;
+      padding: var(--space-16);
     }
   }
 
   h2 {
-    margin-block-end: var(--space-3);
+    margin-block-end: var(--space-4);
     color: var(--color-white);
   }
 

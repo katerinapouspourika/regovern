@@ -1,7 +1,7 @@
 ---
 /*
- * Eyebrow label, heading and optional subtitle at the top of a section.
- * `tone="light"` is for dark backgrounds.
+ * Optional eyebrow label, heading and optional subtitle at the top of a
+ * section. `tone="light"` is for dark backgrounds.
  */
 interface Props {
   eyebrow?: string;
@@ -18,7 +18,7 @@ const {
   title,
   subtitle,
   id,
-  align = "center",
+  align = "start",
   tone = "dark",
 } = Astro.props;
 ---
@@ -32,8 +32,8 @@ const {
 <style>
   .section-heading {
     display: grid;
-    gap: var(--space-3);
-    max-inline-size: 42rem;
+    gap: var(--space-4);
+    max-inline-size: 44rem;
     margin-block-end: var(--space-12);
   }
 
@@ -43,26 +43,10 @@ const {
   }
 
   .eyebrow {
-    display: inline-flex;
-    gap: var(--space-3);
-    align-items: center;
-    justify-self: var(--eyebrow-align, start);
     font-size: var(--font-size-sm);
     font-weight: 600;
-    color: var(--color-navy-700);
-    letter-spacing: 0.06em;
-
-    /* Short gold rule before the label, as in the logo's tagline. */
-    &::before {
-      inline-size: 2rem;
-      block-size: 2px;
-      content: "";
-      background: var(--gradient-gold);
-    }
-  }
-
-  .center .eyebrow {
-    --eyebrow-align: center;
+    color: var(--color-teal-700);
+    letter-spacing: 0.04em;
   }
 
   .subtitle {
@@ -76,11 +60,11 @@ const {
     }
 
     .eyebrow {
-      color: var(--color-gold-300);
+      color: var(--color-teal-200);
     }
 
     .subtitle {
-      color: var(--color-surface);
+      color: var(--color-on-dark);
     }
   }
 </style>
