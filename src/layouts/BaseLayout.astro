@@ -1,0 +1,52 @@
+---
+import "@/styles/global.css";
+import { defaultLocale, localizePath, locales, toLocale } from "@/i18n";
+
+interface Props {
+  /** Full page title, already translated. */
+  title: string;
+  /** Meta description, already translated. */
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const locale = toLocale(Astro.currentLocale);
+const site = Astro.site ?? Astro.url;
+const absolute = (path: string) => new URL(path, site).href;
+
+const canonical = absolute(localizePath(Astro.url.pathname, locale));
+const alternates = locales.map((lang) => ({
+  lang,
+  href: absolute(localizePath(Astro.url.pathname, lang)),
+}));
+const defaultHref = absolute(localizePath(Astro.url.pathname, defaultLocale));
+
+// Preload the fonts for the page's main script; the rest load on demand.
+const script = locale === "el" ? "greek" : "latin";
+const preloadFonts = [
+  `/fonts/inter-${script}-wght-normal.woff2`,
+  `/fonts/source-serif-4-${script}-wght-normal.woff2`,
+];
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates.map(({ lang, href }) => (
+      <link rel="alternate" hreflang={lang} href={href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={defaultHref} />
+    {preloadFonts.map((href) => (
+      <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
+    ))}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
