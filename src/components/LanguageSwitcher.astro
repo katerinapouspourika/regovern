@@ -1,6 +1,18 @@
 ---
-import { localizePath, locales, toLocale, useTranslations } from "@/i18n";
+import {
+  localizePath,
+  locales,
+  toLocale,
+  useTranslations,
+  type Locale,
+} from "@/i18n";
 
+interface Props {
+  /** Where each language's link goes; defaults to the same page in that language. */
+  hrefs?: Partial<Record<Locale, string>> | undefined;
+}
+
+const { hrefs } = Astro.props;
 const locale = toLocale(Astro.currentLocale);
 const targets = locales
   .filter((lang) => lang !== locale)
@@ -8,7 +20,7 @@ const targets = locales
     const t = useTranslations(lang);
     return {
       lang,
-      href: localizePath(Astro.url.pathname, lang),
+      href: hrefs?.[lang] ?? localizePath(Astro.url.pathname, lang),
       short: t("language.short"),
       label: t("language.readIn"),
     };

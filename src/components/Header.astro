@@ -4,7 +4,20 @@ import wordmark from "@/assets/brand/wordmark.png";
 import Icon from "@/components/Icon.astro";
 import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
 import { mainNav } from "@/data/navigation";
-import { localizePath, stripLocale, toLocale, useTranslations } from "@/i18n";
+import {
+  localizePath,
+  stripLocale,
+  toLocale,
+  useTranslations,
+  type Locale,
+} from "@/i18n";
+
+interface Props {
+  /** Language switcher targets; see LanguageSwitcher. */
+  languageHrefs?: Partial<Record<Locale, string>>;
+}
+
+const { languageHrefs } = Astro.props;
 
 const locale = toLocale(Astro.currentLocale);
 const t = useTranslations(locale);
@@ -59,7 +72,7 @@ function isCurrent(path: string): boolean {
           ))}
         </ul>
       </nav>
-      <LanguageSwitcher />
+      <LanguageSwitcher hrefs={languageHrefs} />
     </div>
   </div>
 </header>

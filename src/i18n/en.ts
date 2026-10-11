@@ -242,4 +242,17 @@ export const en: UiStrings = {
   "breadcrumb.label": "Breadcrumb",
 
   "blog.readMore": "Read more",
+  // TODO(content): real Blog page text.
+  "blog.meta.title": "Blog | ReGovern",
+  "blog.meta.description":
+    "Articles from ReGovern on internal audit, risk management, regulatory compliance and corporate governance.",
+  "blog.hero.title": "Blog",
+  "blog.hero.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+  "blog.list.title": "All articles",
+  "blog.empty": "There are no articles yet.",
+  "blog.back": "All articles",
+  "blog.readingTime": "{minutes} min read",
+  "blog.published": "Published",
+  "blog.more": "More articles",
 };

@@ -1,0 +1,83 @@
+---
+/*
+ * Blog list body, shared by src/pages/blog/index.astro (Greek) and
+ * src/pages/en/blog/index.astro (English). Shows only the page language's
+ * posts, newest first.
+ */
+import BlogCard from "@/components/BlogCard.astro";
+import PageHero from "@/components/PageHero.astro";
+import { localizePath, toLocale, useTranslations } from "@/i18n";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPosts, postPath } from "@/utils/blog";
+
+const locale = toLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const posts = await getPosts(locale);
+---
+
+<BaseLayout
+  title={t("blog.meta.title")}
+  description={t("blog.meta.description")}
+>
+  <PageHero title={t("blog.hero.title")} subtitle={t("blog.hero.subtitle")} />
+
+  <section class="list" aria-labelledby="list-title">
+    <div class="container">
+      <h2 id="list-title" class="visually-hidden">
+        {t("blog.list.title")}
+      </h2>
+      {posts.length > 0 ? (
+        <ul class="post-grid">
+          {posts.map((post) => (
+            <li>
+              <BlogCard
+                href={localizePath(postPath(post), locale)}
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.date}
+                cover={post.data.cover}
+                coverAlt={post.data.coverAlt}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="empty">{t("blog.empty")}</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .list {
+    padding-block: var(--space-24);
+    background: var(--color-mist-500);
+  }
+
+  .post-grid {
+    display: grid;
+    gap: var(--space-8);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    li {
+      display: grid;
+    }
+  }
+
+  .empty {
+    padding: var(--space-12);
+    font-size: var(--font-size-lg);
+    color: var(--color-ink);
+    background: var(--color-white);
+  }
+</style>
