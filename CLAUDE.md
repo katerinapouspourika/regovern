@@ -24,6 +24,7 @@ The current goal is **UI/UX approval**: build every page with placeholder conten
 
 ## HTML rules
 
+- The site is bilingual: Greek (default, at `/`) and English (under `/en/`). Never hard-code UI text in components; use the translation files in `src/i18n/`. Every page sets the correct `lang` and `hreflang` links. Details in the **Languages** section of `docs/brief.md`.
 - Every page is a full HTML document rendered by Astro. Shared parts (top contact bar, header, nav, footer, cookie banner) are Astro components in `src/components/`, and pages share one layout in `src/layouts/`.
 - Always set `lang`, a meaningful `<title>` and `<meta name="description">` per page.
 - Semantic elements first (`header`, `nav`, `main`, `section`, `article`, `footer`, `button`); ARIA only when no native element fits.
