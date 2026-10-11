@@ -11,15 +11,15 @@ Decisions and design direction agreed so far. Update this file whenever a decisi
 
 ## Pages
 
-| Page | Contents |
-| --- | --- |
-| **Home** | Top contact bar (phone, email). Hero with headline, short subtitle and two buttons (Our services, Contact us). A row of 3–4 service cards overlapping the bottom of the hero. Company overview with stat counters and a photo. "Why choose us" icon row. Latest three blog posts. Dark call-to-action band (book a consultation). Footer. |
-| **About us** | Short hero banner. Company story. Stat counters. Values (icons). Team members with photos and short bios. |
-| **Services** | Short hero banner. Card grid of all services, then one section per service with a fuller description. Placeholder services: Internal Audit, Risk Management, Regulatory Compliance, Governance Advisory. |
-| **Contact us** | Form (name, email, phone, company, message, privacy consent checkbox) next to phone, email, address and office hours. Optional map. The form does not send anywhere yet; show a clear placeholder success state. |
-| **Blog** | Grid of image cards (cover image, date, title, summary, "Read more"). Single-post template. Developer-run: Markdown files in `src/content/blog/`. |
-| **Privacy Policy** | GDPR privacy notice (placeholder text marked for legal review). |
-| **Cookie Policy** | Explains the cookies used. |
+| Page               | Contents                                                                                                                                                                                                                                                                                                                                  |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Home**           | Top contact bar (phone, email). Hero with headline, short subtitle and two buttons (Our services, Contact us). A row of 3–4 service cards overlapping the bottom of the hero. Company overview with stat counters and a photo. "Why choose us" icon row. Latest three blog posts. Dark call-to-action band (book a consultation). Footer. |
+| **About us**       | Short hero banner. Company story. Stat counters. Values (icons). Team members with photos and short bios.                                                                                                                                                                                                                                 |
+| **Services**       | Short hero banner. Card grid of all services, then one section per service with a fuller description. Placeholder services: Internal Audit, Risk Management, Regulatory Compliance, Governance Advisory.                                                                                                                                  |
+| **Contact us**     | Form (name, email, phone, company, message, privacy consent checkbox) next to phone, email, address and office hours. Optional map. The form does not send anywhere yet; show a clear placeholder success state.                                                                                                                          |
+| **Blog**           | Grid of image cards (cover image, date, title, summary, "Read more"). Single-post template. Developer-run: Markdown files in `src/content/blog/`.                                                                                                                                                                                         |
+| **Privacy Policy** | GDPR privacy notice (placeholder text marked for legal review).                                                                                                                                                                                                                                                                           |
+| **Cookie Policy**  | Explains the cookies used.                                                                                                                                                                                                                                                                                                                |
 
 Shared components: top contact bar, header with logo, nav and language switcher, footer (logo, short description, nav links, contact details, company legal details, links to the privacy and cookie policies), cookie banner, page hero banner, section heading, service card, stat counter, blog card, call-to-action band.
 
@@ -27,13 +27,13 @@ Shared components: top contact bar, header with logo, nav and language switcher,
 
 Reference images are in `docs/design-references/`. They are AI-generated mockups (the text in them is garbled), so use them for layout and mood only.
 
-| File | What to take from it |
-| --- | --- |
-| `01-beadvices.jpg` | Top contact bar; the "years of experience" section. Ignore the dated all-caps type and stock-people photos. |
-| `02-skystructure-dark.jpg` | Main reference. Dark navy hero with architecture photography, serif headline, three-panel block overlapping the hero (About / Expertise grid with icons / Recent items), company overview with `+15 / +350 / +80` stats and a photo. |
-| `03-elevate-advisory.jpg` | Icon row of three services on a dark band; light section with three image cards (use for blog cards); centred section heading with subtitle. |
-| `04-skystructure-light.jpg` | Same layout as 02 in a lighter treatment; floating nav bar; one headline word in the accent colour. |
-| `05-global-logistics.jpg` | Contact details in the header; white service cards overlapping the hero; "Why choose us" with round icons; About block with a photo. |
+| File                        | What to take from it                                                                                                                                                                                                                 |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `01-beadvices.jpg`          | Top contact bar; the "years of experience" section. Ignore the dated all-caps type and stock-people photos.                                                                                                                          |
+| `02-skystructure-dark.jpg`  | Main reference. Dark navy hero with architecture photography, serif headline, three-panel block overlapping the hero (About / Expertise grid with icons / Recent items), company overview with `+15 / +350 / +80` stats and a photo. |
+| `03-elevate-advisory.jpg`   | Icon row of three services on a dark band; light section with three image cards (use for blog cards); centred section heading with subtitle.                                                                                         |
+| `04-skystructure-light.jpg` | Same layout as 02 in a lighter treatment; floating nav bar; one headline word in the accent colour.                                                                                                                                  |
+| `05-global-logistics.jpg`   | Contact details in the header; white service cards overlapping the hero; "Why choose us" with round icons; About block with a photo.                                                                                                 |
 
 Common patterns to reproduce:
 
@@ -48,16 +48,16 @@ Common patterns to reproduce:
 
 The ReGovern logo uses **navy and gold**, so the site follows the logo. Teal from the references is not used. Final values will be sampled from the logo file once it is in the repo; until then use:
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `--color-navy-900` | `#0B1F3A` | Hero, dark sections, footer |
-| `--color-navy-700` | `#1C2E4A` | Cards and panels on dark sections |
-| `--color-gold-500` | `#C9A227` | Accent: buttons, highlighted words, icons |
-| `--color-gold-300` | `#E3C770` | Hover states, accents on navy |
-| `--color-surface` | `#F4F6F9` | Light section background |
-| `--color-white` | `#FFFFFF` | Cards on light sections |
-| `--color-text` | `#1E2733` | Body text on light backgrounds |
-| `--color-text-muted` | `#5B6676` | Secondary text |
+| Token                | Value     | Use                                       |
+| -------------------- | --------- | ----------------------------------------- |
+| `--color-navy-900`   | `#0B1F3A` | Hero, dark sections, footer               |
+| `--color-navy-700`   | `#1C2E4A` | Cards and panels on dark sections         |
+| `--color-gold-500`   | `#C9A227` | Accent: buttons, highlighted words, icons |
+| `--color-gold-300`   | `#E3C770` | Hover states, accents on navy             |
+| `--color-surface`    | `#F4F6F9` | Light section background                  |
+| `--color-white`      | `#FFFFFF` | Cards on light sections                   |
+| `--color-text`       | `#1E2733` | Body text on light backgrounds            |
+| `--color-text-muted` | `#5B6676` | Secondary text                            |
 
 Contrast rule: gold works on navy and as a button fill with navy text, but gold text on white fails WCAG contrast. On light backgrounds use navy for text and links, and gold only for decoration or as a fill.
 

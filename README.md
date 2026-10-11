@@ -8,10 +8,10 @@ Website for ReGovern, an internal audit company.
 
 ## Branches
 
-| Branch | Purpose |
-| --- | --- |
-| `main` | Approved releases only. |
-| `dev` | Integration branch. Branches from `main`. |
+| Branch               | Purpose                                                           |
+| -------------------- | ----------------------------------------------------------------- |
+| `main`               | Approved releases only.                                           |
+| `dev`                | Integration branch. Branches from `main`.                         |
 | `feature/*`, `fix/*` | One piece of work each. Branch from `dev`, merge back into `dev`. |
 
 `dev` is merged into `main` once the client approves.
