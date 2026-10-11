@@ -1,0 +1,106 @@
+---
+/*
+ * One 404 page for both languages: Cloudflare Pages serves it for any
+ * unknown URL (without it, every unknown URL would show the home page).
+ */
+import { Image } from "astro:assets";
+import skyline from "@/assets/placeholders/skyline.jpg";
+import Button from "@/components/Button.astro";
+import { localizePath, useTranslations } from "@/i18n";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const el = useTranslations("el");
+const en = useTranslations("en");
+---
+
+<BaseLayout
+  title={el("notFound.meta.title")}
+  description={el("notFound.meta.description")}
+  noindex
+>
+  <section class="not-found" aria-labelledby="not-found-title">
+    <Image
+      class="background"
+      src={skyline}
+      alt=""
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+    />
+    <div class="container inner">
+      <p class="code" aria-hidden="true">
+        404
+      </p>
+      <div class="message">
+        <h1 id="not-found-title">{el("notFound.title")}</h1>
+        <p>{el("notFound.text")}</p>
+        <Button href={localizePath("/", "el")}>{el("notFound.home")}</Button>
+      </div>
+      <div class="message" lang="en">
+        <h2>{en("notFound.title")}</h2>
+        <p>{en("notFound.text")}</p>
+        <Button href={localizePath("/", "en")} variant="outline-dark">
+          {en("notFound.home")}
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    position: relative;
+    isolation: isolate;
+    padding-block: calc(var(--header-height) + var(--space-24)) var(--space-24);
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      content: "";
+      background: linear-gradient(
+        90deg,
+        rgb(245 247 248 / 92%) 0%,
+        rgb(245 247 248 / 70%) 50%,
+        rgb(245 247 248 / 20%) 100%
+      );
+    }
+  }
+
+  .background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  .inner {
+    display: grid;
+    gap: var(--space-12);
+    justify-items: start;
+  }
+
+  .code {
+    font-family: var(--font-serif);
+    font-size: clamp(5rem, 3rem + 10vw, 9rem);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-teal-500);
+  }
+
+  .message {
+    display: grid;
+    gap: var(--space-4);
+    justify-items: start;
+
+    h2 {
+      font-size: var(--font-size-2xl);
+    }
+
+    p {
+      color: var(--color-ink);
+    }
+  }
+</style>

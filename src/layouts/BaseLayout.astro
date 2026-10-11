@@ -16,9 +16,11 @@ interface Props {
   title: string;
   /** Meta description, already translated. */
   description: string;
+  /** For pages that must not be indexed or linked as alternates (404). */
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const locale = toLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const site = Astro.site ?? Astro.url;
@@ -46,11 +48,17 @@ const preloadFonts = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {alternates.map(({ lang, href }) => (
-      <link rel="alternate" hreflang={lang} href={href} />
-    ))}
-    <link rel="alternate" hreflang="x-default" href={defaultHref} />
+    {noindex ? (
+      <meta name="robots" content="noindex" />
+    ) : (
+      <>
+        <link rel="canonical" href={canonical} />
+        {alternates.map(({ lang, href }) => (
+          <link rel="alternate" hreflang={lang} href={href} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={defaultHref} />
+      </>
+    )}
     {preloadFonts.map((href) => (
       <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
     ))}

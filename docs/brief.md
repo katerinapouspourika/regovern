@@ -127,7 +127,8 @@ Until then the site uses generated abstract placeholder images in `src/assets/pl
 - [x] Language: both Greek (default) and English. See **Languages**.
 - [ ] Real content: page text, services list, team, stats, contact details, address, legal company details, starter blog posts, photos.
 - [ ] Contact form service (Formspree, Web3Forms, Netlify Forms) and the receiving inbox. After approval.
-- [ ] Hosting (Netlify, Cloudflare Pages, GitHub Pages) and domain. After approval.
+- [x] Hosting: **Cloudflare Pages** (free), with a fixed preview link for `dev` and one per pull request. Setup in `docs/hosting.md`.
+- [ ] Domain. At launch.
 - [ ] Analytics, if any. After approval; must sit behind the cookie banner.
 
 ## Build order
