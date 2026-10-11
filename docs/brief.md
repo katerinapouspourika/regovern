@@ -63,16 +63,17 @@ Contrast rule: gold works on navy and as a button fill with navy text, but gold 
 
 ### Typography
 
-- Headings: a serif for an authoritative tone, as in references 02 and 04. It **must include Greek glyphs**: Source Serif 4 or Noto Serif Display. (DM Serif Display has no Greek, so it is ruled out.)
+- Headings: a serif for an authoritative tone, as in references 02 and 04. It **must include Greek glyphs**. **Source Serif 4** is used (variable font, Greek subset). Noto Serif Display was the alternative; DM Serif Display has no Greek, so it is ruled out.
 - Body: Inter (includes Greek).
-- Both self-hosted, including the Greek subsets.
+- Both self-hosted, including the Greek subsets: font files in `public/fonts/`, `@font-face` rules in `src/styles/global.css`, sources and licences in `docs/fonts.md`.
 - Do not use `text-transform: uppercase` on Greek text without `lang="el"` set on the page: Greek capitals drop their accent marks (tonos), and browsers only do this correctly when they know the language. Prefer sentence-case headings.
 
 ## Languages
 
 The site is bilingual: **Greek and English**, with every page, component and legal text in both.
 
-- Astro's built-in i18n routing. **Greek is the default language at `/`** (for example `/services`); English lives under `/en/` (for example `/en/services`). Page slugs stay in English in both languages so the URLs mirror each other.
+- Astro's built-in i18n routing. **Greek is the default language at `/`** (for example `/services/`); English lives under `/en/` (for example `/en/services/`). Page slugs stay in English in both languages so the URLs mirror each other. URLs always end in `/` (`trailingSlash: "always"`).
+- Each page's body is one component in `src/components/pages/`, rendered by a thin route file in both `src/pages/` and `src/pages/en/`, so the two languages never drift apart. `src/i18n/index.ts` has the helpers (`useTranslations`, `localizePath`, `formatDate`, `formatNumber`).
 - A language switcher in the header links to the same page in the other language, not to the home page.
 - Each page sets `<html lang="el">` or `<html lang="en">` and adds `hreflang` alternate links for both languages plus `x-default`.
 - UI strings (nav labels, buttons, form labels, footer, cookie banner) live in one translation file per language under `src/i18n/`; components never hard-code text.
