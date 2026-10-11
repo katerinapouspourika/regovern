@@ -201,6 +201,11 @@ export const en: UiStrings = {
   "about.team.member4.bio":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
 
+  "notFound.meta.title": "Page not found | ReGovern",
+  "notFound.meta.description": "The page you asked for does not exist.",
+  "notFound.title": "Page not found",
+  "notFound.text": "The page you asked for does not exist or has moved.",
+  "notFound.home": "Back to the home page",
   "breadcrumb.label": "Breadcrumb",
 
   "blog.readMore": "Read more",

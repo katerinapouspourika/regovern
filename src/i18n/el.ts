@@ -203,6 +203,11 @@ export const el = {
   "about.team.member4.bio":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
 
+  "notFound.meta.title": "Η σελίδα δεν βρέθηκε | ReGovern",
+  "notFound.meta.description": "Η σελίδα που ζητήσατε δεν υπάρχει.",
+  "notFound.title": "Η σελίδα δεν βρέθηκε",
+  "notFound.text": "Η σελίδα που ζητήσατε δεν υπάρχει ή έχει μετακινηθεί.",
+  "notFound.home": "Επιστροφή στην αρχική",
   "breadcrumb.label": "Διαδρομή πλοήγησης",
 
   "blog.readMore": "Διαβάστε περισσότερα",
