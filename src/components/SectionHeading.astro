@@ -1,0 +1,86 @@
+---
+/*
+ * Eyebrow label, heading and optional subtitle at the top of a section.
+ * `tone="light"` is for dark backgrounds.
+ */
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  /** Id for the heading, so the section can use aria-labelledby. */
+  id?: string;
+  align?: "start" | "center";
+  tone?: "dark" | "light";
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  id,
+  align = "center",
+  tone = "dark",
+} = Astro.props;
+---
+
+<header class:list={["section-heading", align, tone]}>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h2 id={id}>{title}</h2>
+  {subtitle && <p class="subtitle">{subtitle}</p>}
+</header>
+
+<style>
+  .section-heading {
+    display: grid;
+    gap: var(--space-3);
+    max-inline-size: 42rem;
+    margin-block-end: var(--space-12);
+  }
+
+  .center {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    gap: var(--space-3);
+    align-items: center;
+    justify-self: var(--eyebrow-align, start);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-navy-700);
+    letter-spacing: 0.06em;
+
+    /* Short gold rule before the label, as in the logo's tagline. */
+    &::before {
+      inline-size: 2rem;
+      block-size: 2px;
+      content: "";
+      background: var(--gradient-gold);
+    }
+  }
+
+  .center .eyebrow {
+    --eyebrow-align: center;
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+  }
+
+  .light {
+    h2 {
+      color: var(--color-white);
+    }
+
+    .eyebrow {
+      color: var(--color-gold-300);
+    }
+
+    .subtitle {
+      color: var(--color-surface);
+    }
+  }
+</style>

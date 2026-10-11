@@ -1,0 +1,70 @@
+---
+/*
+ * A link styled as a button. Variants:
+ * - primary: gold fill with navy text (any background)
+ * - outline-light: white outline, for dark backgrounds
+ * - outline-dark: navy outline, for light backgrounds
+ */
+interface Props {
+  href: string;
+  variant?: "primary" | "outline-light" | "outline-dark";
+}
+
+const { href, variant = "primary" } = Astro.props;
+---
+
+<a class:list={["button", variant]} href={href}>
+  <slot />
+</a>
+
+<style>
+  .button {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    justify-content: center;
+    min-block-size: 3rem;
+    padding: var(--space-3) var(--space-6);
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+    transition:
+      background-color var(--duration-fast),
+      border-color var(--duration-fast),
+      color var(--duration-fast);
+  }
+
+  .primary {
+    color: var(--color-navy-900);
+    background: var(--color-gold-500);
+    border-color: var(--color-gold-500);
+
+    &:hover {
+      background: var(--color-gold-300);
+      border-color: var(--color-gold-300);
+    }
+  }
+
+  .outline-light {
+    color: var(--color-white);
+    border-color: var(--color-white);
+
+    &:hover {
+      color: var(--color-navy-900);
+      background: var(--color-white);
+    }
+  }
+
+  .outline-dark {
+    color: var(--color-navy-900);
+    border-color: var(--color-navy-900);
+
+    &:hover {
+      color: var(--color-white);
+      background: var(--color-navy-900);
+    }
+  }
+</style>

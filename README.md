@@ -20,18 +20,21 @@ npm run preview   # serves dist/
 
 ## Project structure
 
-| Path                           | Contents                                                                                           |
-| ------------------------------ | -------------------------------------------------------------------------------------------------- |
-| `src/pages/`, `src/pages/en/`  | Routes: Greek at `/`, English under `/en/`. Thin files that render a page component.               |
-| `src/components/pages/`        | One body component per page, shared by both languages.                                             |
-| `src/components/`              | Shared components: top bar, header (mobile menu, language switcher), footer, cookie banner, icons. |
-| `src/data/`                    | Navigation and the company details that are the same in every language.                            |
-| `src/scripts/`                 | Client-side TypeScript, such as the cookie consent store.                                          |
-| `src/layouts/BaseLayout.astro` | The HTML document: `lang`, title, description, canonical and `hreflang` links, font preloads.      |
-| `src/i18n/`                    | Languages (`config.ts`), UI strings (`el.ts`, `en.ts`) and helpers (`index.ts`).                   |
-| `src/styles/global.css`        | Fonts, reset, design tokens and base styles.                                                       |
-| `public/fonts/`                | Self-hosted fonts. See [docs/fonts.md](docs/fonts.md).                                             |
-| `src/assets/brand/`            | Logo files. See **Logo** in the brief.                                                             |
+| Path                                           | Contents                                                                                           |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `src/pages/`, `src/pages/en/`                  | Routes: Greek at `/`, English under `/en/`. Thin files that render a page component.               |
+| `src/components/pages/`                        | One body component per page, shared by both languages.                                             |
+| `src/components/`                              | Shared components: top bar, header (mobile menu, language switcher), footer, cookie banner, icons. |
+| `src/data/`                                    | Navigation and the company details that are the same in every language.                            |
+| `src/scripts/`                                 | Client-side TypeScript, such as the cookie consent store.                                          |
+| `src/content/blog/el/`, `src/content/blog/en/` | Blog posts as Markdown, one file per post and language. Schema in `src/content.config.ts`.         |
+| `src/utils/`                                   | Build-time helpers, such as loading blog posts per language.                                       |
+| `src/assets/placeholders/`                     | Placeholder images until real photos arrive.                                                       |
+| `src/layouts/BaseLayout.astro`                 | The HTML document: `lang`, title, description, canonical and `hreflang` links, font preloads.      |
+| `src/i18n/`                                    | Languages (`config.ts`), UI strings (`el.ts`, `en.ts`) and helpers (`index.ts`).                   |
+| `src/styles/global.css`                        | Fonts, reset, design tokens and base styles.                                                       |
+| `public/fonts/`                                | Self-hosted fonts. See [docs/fonts.md](docs/fonts.md).                                             |
+| `src/assets/brand/`                            | Logo files. See **Logo** in the brief.                                                             |
 
 ## Branches
 

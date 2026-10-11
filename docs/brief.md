@@ -106,6 +106,8 @@ The site is bilingual: **Greek and English**, with every page, component and leg
 
 Placeholder photos come from free stock libraries (Unsplash, Pexels): architecture, glass office buildings, meeting rooms, documents and laptops. Avoid posed smiling-people stock. Record each photo's source URL next to it so licences can be checked.
 
+Until then the site uses generated abstract placeholder images in `src/assets/placeholders/` (the build environment cannot reach the stock libraries). Its README lists where each one is used.
+
 ## Legal (Greece / EU)
 
 - **Privacy Policy** page following GDPR, naming the data controller (ReGovern), what the contact form collects, why, how long it is kept, the visitor's rights, and the right to complain to the Hellenic Data Protection Authority. Placeholder text, to be reviewed by the client.

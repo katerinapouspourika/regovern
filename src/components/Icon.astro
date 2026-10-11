@@ -5,7 +5,21 @@
  * Phone path from Feather Icons (MIT licence).
  */
 export type IconName =
-  "phone" | "mail" | "clock" | "map-pin" | "menu" | "close";
+  | "phone"
+  | "mail"
+  | "clock"
+  | "map-pin"
+  | "menu"
+  | "close"
+  | "arrow-right"
+  | "clipboard-check"
+  | "shield"
+  | "scale"
+  | "landmark"
+  | "compass"
+  | "award"
+  | "lock"
+  | "target";
 
 interface Props {
   name: IconName;
@@ -51,4 +65,48 @@ const { name, size = 20 } = Astro.props;
   )}
   {name === "menu" && <path d="M4 7h16M4 12h16M4 17h16" />}
   {name === "close" && <path d="M6 6l12 12M18 6 6 18" />}
+  {name === "arrow-right" && <path d="M5 12h14M13 6l6 6-6 6" />}
+  {name === "clipboard-check" && (
+    <>
+      <rect x="5" y="4" width="14" height="17" rx="2" />
+      <path d="M9 4V3h6v1M9 13l2 2 4-4" />
+    </>
+  )}
+  {name === "shield" && (
+    <>
+      <path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z" />
+      <path d="M12 8v4M12 15.5v.5" />
+    </>
+  )}
+  {name === "scale" && (
+    <path d="M12 4v16M8 20h8M4 8h16M4 8l-2.5 6a2.5 2.5 0 0 0 5 0zM20 8l-2.5 6a2.5 2.5 0 0 0 5 0z" />
+  )}
+  {name === "landmark" && (
+    <path d="M3 21h18M5 18v-7M9.5 18v-7M14.5 18v-7M19 18v-7M3 9l9-6 9 6z" />
+  )}
+  {name === "compass" && (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m15.5 8.5-2 5-5 2 2-5z" />
+    </>
+  )}
+  {name === "award" && (
+    <>
+      <circle cx="12" cy="9" r="5.5" />
+      <path d="m8.5 13.5-1.5 7.5 5-2.5 5 2.5-1.5-7.5" />
+    </>
+  )}
+  {name === "lock" && (
+    <>
+      <rect x="5" y="11" width="14" height="10" rx="2" />
+      <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+    </>
+  )}
+  {name === "target" && (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1" />
+    </>
+  )}
 </svg>
