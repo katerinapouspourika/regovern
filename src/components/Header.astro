@@ -16,27 +16,28 @@ function isCurrent(path: string): boolean {
 }
 ---
 
+{/* Floats over the top of each page's hero; the navigation sits in a glass panel. */}
 <header class="site-header">
   <div class="container inner">
     <a class="brand" href={localizePath("/", locale)}>
       <Image
         src={wordmark}
         alt={t("header.home.label")}
-        height={32}
+        height={36}
         densities={[1, 2]}
         loading="eager"
       />
     </a>
 
     {/* The mobile menu is a native popover: no JavaScript, Esc and outside clicks close it. */}
-    <button class="menu-button" type="button" popovertarget="site-menu">
-      <Icon name="menu" size={24} />
+    <button class="menu-button glass" type="button" popovertarget="site-menu">
+      <Icon name="menu" size={22} />
       {t("menu.open")}
     </button>
 
-    <div class="menu" id="site-menu" popover>
+    <div class="menu glass" id="site-menu" popover>
       <button
-        class="menu-button close"
+        class="close"
         type="button"
         popovertarget="site-menu"
         popovertargetaction="hide"
@@ -65,11 +66,9 @@ function isCurrent(path: string): boolean {
 
 <style>
   .site-header {
-    position: sticky;
-    inset-block-start: 0;
+    position: absolute;
+    inset: 0 0 auto;
     z-index: 10;
-    background: var(--color-white);
-    border-block-end: 1px solid var(--color-border);
   }
 
   .inner {
@@ -78,6 +77,7 @@ function isCurrent(path: string): boolean {
     align-items: center;
     justify-content: space-between;
     min-block-size: var(--header-height);
+    padding-block: var(--space-4);
   }
 
   .brand {
@@ -88,9 +88,18 @@ function isCurrent(path: string): boolean {
       block-size: 1.75rem;
 
       @media (width >= 48rem) {
-        block-size: 2rem;
+        block-size: 2.25rem;
       }
     }
+  }
+
+  /* Frosted white panel, as in the reference design's navigation bar. */
+  .glass {
+    background: rgb(255 255 255 / 80%);
+    border: 1px solid rgb(255 255 255 / 70%);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(14px) saturate(1.4);
   }
 
   .menu-button {
@@ -98,13 +107,10 @@ function isCurrent(path: string): boolean {
     gap: var(--space-2);
     align-items: center;
     min-block-size: 2.75rem;
-    padding-inline: var(--space-3);
-    font-weight: 600;
-    color: var(--color-navy-900);
+    padding-inline: var(--space-4);
+    font-weight: 500;
+    color: var(--color-ink);
     cursor: pointer;
-    background: none;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
 
     @media (width >= 64rem) {
       display: none;
@@ -112,46 +118,54 @@ function isCurrent(path: string): boolean {
   }
 
   .close {
+    display: inline-grid;
+    place-items: center;
     justify-self: end;
-    padding-inline: var(--space-2);
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    color: var(--color-ink);
+    cursor: pointer;
+    background: none;
+    border: 0;
+
+    @media (width >= 64rem) {
+      display: none;
+    }
   }
 
-  /* Mobile: a panel that drops down from the top of the screen. */
+  /* Mobile: a card that drops down over the page. */
   .menu {
     &:popover-open {
       display: grid;
       gap: var(--space-6);
       justify-items: start;
-      inline-size: 100%;
+      inline-size: auto;
       max-inline-size: none;
-      max-block-size: 100dvh;
-      padding: var(--space-4) var(--container-gutter) var(--space-8);
+      max-block-size: calc(100dvh - 2 * var(--space-3));
+      padding: var(--space-4) var(--space-6) var(--space-8);
       margin: 0;
       overflow-y: auto;
       color: var(--color-text);
       background: var(--color-white);
-      border: 0;
-      box-shadow: var(--shadow-card);
-      inset: 0 0 auto;
+      box-shadow: var(--shadow-raised);
+      inset: var(--space-3) var(--space-3) auto;
     }
 
     &::backdrop {
-      background: rgb(19 40 71 / 50%);
+      background: rgb(38 44 47 / 40%);
     }
 
-    /* Desktop: always visible inline, whatever the popover state. */
+    /* Desktop: always visible as the glass bar, whatever the popover state. */
     @media (width >= 64rem) {
       position: static;
       display: flex;
-      gap: var(--space-8);
+      gap: var(--space-6);
       align-items: center;
       inline-size: auto;
-      padding: 0;
+      padding: var(--space-1) var(--space-2) var(--space-1) var(--space-8);
       margin: 0;
       overflow: visible;
       color: inherit;
-      background: none;
-      border: 0;
     }
   }
 
@@ -164,7 +178,7 @@ function isCurrent(path: string): boolean {
 
     @media (width >= 64rem) {
       display: flex;
-      gap: var(--space-6);
+      gap: var(--space-8);
     }
 
     a {
@@ -172,7 +186,7 @@ function isCurrent(path: string): boolean {
       padding-block: var(--space-2);
       font-size: var(--font-size-lg);
       font-weight: 500;
-      color: var(--color-navy-900);
+      color: var(--color-ink);
       text-decoration: none;
       border-block-end: 2px solid transparent;
       transition: border-color var(--duration-fast);
@@ -183,7 +197,7 @@ function isCurrent(path: string): boolean {
 
       &:hover,
       &[aria-current="page"] {
-        border-color: var(--color-gold-500);
+        border-color: currentcolor;
       }
     }
   }

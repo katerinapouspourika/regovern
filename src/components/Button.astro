@@ -1,13 +1,14 @@
 ---
 /*
  * A link styled as a button. Variants:
- * - primary: gold fill with navy text (any background)
+ * - primary: charcoal fill with white text (light backgrounds and photos)
+ * - accent: teal fill with white text
+ * - outline-dark: charcoal outline, for light backgrounds
  * - outline-light: white outline, for dark backgrounds
- * - outline-dark: navy outline, for light backgrounds
  */
 interface Props {
   href: string;
-  variant?: "primary" | "outline-light" | "outline-dark";
+  variant?: "primary" | "accent" | "outline-dark" | "outline-light";
 }
 
 const { href, variant = "primary" } = Astro.props;
@@ -24,12 +25,12 @@ const { href, variant = "primary" } = Astro.props;
     align-items: center;
     justify-content: center;
     min-block-size: 3rem;
-    padding: var(--space-3) var(--space-6);
-    font-weight: 600;
+    padding: var(--space-3) var(--space-8);
+    font-weight: 500;
     line-height: 1.2;
     text-align: center;
     text-decoration: none;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     border-radius: var(--radius);
     transition:
       background-color var(--duration-fast),
@@ -38,33 +39,42 @@ const { href, variant = "primary" } = Astro.props;
   }
 
   .primary {
-    color: var(--color-navy-900);
-    background: var(--color-gold-500);
-    border-color: var(--color-gold-500);
+    color: var(--color-white);
+    background: var(--color-slate-800);
+    border-color: var(--color-slate-700);
+    box-shadow: 0 0.5rem 1.25rem rgb(38 44 47 / 20%);
 
     &:hover {
-      background: var(--color-gold-300);
-      border-color: var(--color-gold-300);
+      background: var(--color-ink);
+    }
+  }
+
+  .accent {
+    color: var(--color-white);
+    background: var(--color-teal-700);
+
+    &:hover {
+      background: var(--color-ink);
+    }
+  }
+
+  .outline-dark {
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+
+    &:hover {
+      color: var(--color-white);
+      background: var(--color-ink);
     }
   }
 
   .outline-light {
     color: var(--color-white);
-    border-color: var(--color-white);
+    border-color: rgb(255 255 255 / 70%);
 
     &:hover {
-      color: var(--color-navy-900);
+      color: var(--color-ink);
       background: var(--color-white);
-    }
-  }
-
-  .outline-dark {
-    color: var(--color-navy-900);
-    border-color: var(--color-navy-900);
-
-    &:hover {
-      color: var(--color-white);
-      background: var(--color-navy-900);
     }
   }
 </style>

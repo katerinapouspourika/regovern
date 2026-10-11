@@ -11,72 +11,77 @@ Decisions and design direction agreed so far. Update this file whenever a decisi
 
 ## Pages
 
-| Page               | Contents                                                                                                                                                                                                                                                                                                                                  |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Home**           | Top contact bar (phone, email). Hero with headline, short subtitle and two buttons (Our services, Contact us). A row of 3–4 service cards overlapping the bottom of the hero. Company overview with stat counters and a photo. "Why choose us" icon row. Latest three blog posts. Dark call-to-action band (book a consultation). Footer. |
-| **About us**       | Short hero banner. Company story. Stat counters. Values (icons). Team members with photos and short bios.                                                                                                                                                                                                                                 |
-| **Services**       | Short hero banner. Card grid of all services, then one section per service with a fuller description. Placeholder services: Internal Audit, Risk Management, Regulatory Compliance, Governance Advisory.                                                                                                                                  |
-| **Contact us**     | Form (name, email, phone, company, message, privacy consent checkbox) next to phone, email, address and office hours. Optional map. The form does not send anywhere yet; show a clear placeholder success state.                                                                                                                          |
-| **Blog**           | Grid of image cards (cover image, date, title, summary, "Read more"). Single-post template. Developer-run: Markdown files in `src/content/blog/`.                                                                                                                                                                                         |
-| **Privacy Policy** | GDPR privacy notice (placeholder text marked for legal review).                                                                                                                                                                                                                                                                           |
-| **Cookie Policy**  | Explains the cookies used.                                                                                                                                                                                                                                                                                                                |
+| Page               | Contents                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Home**           | Hero with headline, tagline and two buttons (Our services, Contact us). Three panels overlapping the bottom of the hero: About us (dark, with photo), Our expertise (light, the four services), Latest articles (dark, two posts). Company overview sheet with stat counters and a photo. "How we work" steps. Call-to-action panel (book a consultation). Footer. |
+| **About us**       | Short hero banner. Company story. Stat counters. Values (icons). Team members with photos and short bios.                                                                                                                                                                                                                                                          |
+| **Services**       | Short hero banner. Card grid of all services, then one section per service with a fuller description. Placeholder services: Internal Audit, Risk Management, Regulatory Compliance, Governance Advisory.                                                                                                                                                           |
+| **Contact us**     | Form (name, email, phone, company, message, privacy consent checkbox) next to phone, email, address and office hours. Optional map. The form does not send anywhere yet; show a clear placeholder success state.                                                                                                                                                   |
+| **Blog**           | Grid of image cards (cover image, date, title, summary, "Read more"). Single-post template. Developer-run: Markdown files in `src/content/blog/`.                                                                                                                                                                                                                  |
+| **Privacy Policy** | GDPR privacy notice (placeholder text marked for legal review).                                                                                                                                                                                                                                                                                                    |
+| **Cookie Policy**  | Explains the cookies used.                                                                                                                                                                                                                                                                                                                                         |
 
-Shared components: top contact bar, header with logo, nav and language switcher, footer (logo, short description, nav links, contact details, company legal details, links to the privacy and cookie policies), cookie banner, page hero banner, section heading, service card, stat counter, blog card, call-to-action band.
+Shared components: header with logo, nav and language switcher, footer (logo, short description, nav links, contact details, company legal details, links to the privacy and cookie policies), cookie banner, page hero banner, section heading, service card, stat counter, blog card, call-to-action band.
 
 ## Design direction
 
+**Revised after client feedback (October 2026):** the first build, in the logo's navy and gold with dense dark bands, felt "too AI-made". The client wants the airier, more modern look of references 04 (preferred) and 06: bright photography, charcoal and slate panels, a teal accent, light greys and generous white space. The site no longer takes its colours from the logo.
+
 Reference images are in `docs/design-references/`. They are AI-generated mockups (the text in them is garbled), so use them for layout and mood only.
 
-| File                        | What to take from it                                                                                                                                                                                                                 |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `01-beadvices.jpg`          | Top contact bar; the "years of experience" section. Ignore the dated all-caps type and stock-people photos.                                                                                                                          |
-| `02-skystructure-dark.jpg`  | Main reference. Dark navy hero with architecture photography, serif headline, three-panel block overlapping the hero (About / Expertise grid with icons / Recent items), company overview with `+15 / +350 / +80` stats and a photo. |
-| `03-elevate-advisory.jpg`   | Icon row of three services on a dark band; light section with three image cards (use for blog cards); centred section heading with subtitle.                                                                                         |
-| `04-skystructure-light.jpg` | Same layout as 02 in a lighter treatment; floating nav bar; one headline word in the accent colour.                                                                                                                                  |
-| `05-global-logistics.jpg`   | Contact details in the header; white service cards overlapping the hero; "Why choose us" with round icons; About block with a photo.                                                                                                 |
+| File                                                                     | What to take from it                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `04-skystructure-light.jpg`                                              | **Main reference.** Bright, sunlit architecture hero with dark serif headline and one word in teal; logo top left and a floating frosted-glass nav bar top right; three panels overlapping the bottom of the hero (dark About with photo, raised light-grey Expertise 2×2 grid with teal line icons, dark Recent items with captioned photos); thin bronze lines under panels; white "company overview" sheet on a blue-grey backdrop with teal `+15 / +350 / +80` stats and a photo. |
+| `06-prosperum.jpg`                                                       | Second reference. White cards overlapping the hero, generous spacing, serif headings, and the "How we work" row of round icons joined by a line.                                                                                                                                                                                                                                                                                                                                      |
+| `02-skystructure-dark.jpg`                                               | Same layout as 04 in a dark treatment. Layout only.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `01-beadvices.jpg`, `03-elevate-advisory.jpg`, `05-global-logistics.jpg` | Earlier references, now secondary.                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
-Common patterns to reproduce:
+Patterns to reproduce:
 
-- Dark hero with corporate architecture or office photography and a dark overlay for legible text.
-- A card row that overlaps the bottom edge of the hero. On mobile the cards stack below the hero instead of overlapping.
-- Thin line icons above short blurbs.
-- Stat counters.
-- Alternating dark and light full-width sections.
-- One accent colour used sparingly (buttons, a highlighted headline word, icons, small labels).
+- Bright hero photo with a light wash on the text side; dark text; one headline word in teal.
+- The header floats over the hero: logo on the left, navigation in a frosted-glass panel on the right. No separate top contact bar (contact details are in the footer and on the contact page).
+- Panels or cards overlapping the bottom edge of the hero. On mobile they stack below it instead.
+- Mix of dark slate panels, light grey panels and white sheets, each with a thin bronze line along its base.
+- Thin teal line icons, teal stat figures.
+- Plenty of space: large section padding, few elements per row.
 
 ### Colours
 
-The ReGovern logo uses **navy and gold**, so the site follows the logo. Teal from the references is not used. Values are sampled from the logo file (`src/assets/brand/source/`):
-
-| Token                | Value                | Use                                                                         |
-| -------------------- | -------------------- | --------------------------------------------------------------------------- |
-| `--color-navy-900`   | `#132847`            | Logo navy. Hero, dark sections, footer, text and links on light backgrounds |
-| `--color-navy-700`   | `#213B60`            | Cards and panels on dark sections                                           |
-| `--color-gold-700`   | `#A07B38`            | Dark end of the logo's gold gradient                                        |
-| `--color-gold-500`   | `#B48C49`            | Accent: buttons, highlighted words, icons                                   |
-| `--color-gold-300`   | `#E6C07F`            | Light end of the gradient. Hover states, accents on navy                    |
-| `--gradient-gold`    | gold 300 → 500 → 700 | Decorative gold, as in the logo                                             |
-| `--color-surface`    | `#F4F6F9`            | Light section background                                                    |
-| `--color-white`      | `#FFFFFF`            | Cards on light sections                                                     |
-| `--color-text`       | `#1E2733`            | Body text on light backgrounds                                              |
-| `--color-text-muted` | `#5B6676`            | Secondary text                                                              |
+| Token                | Value     | Use                                                           |
+| -------------------- | --------- | ------------------------------------------------------------- |
+| `--color-ink`        | `#2A2C2E` | Headings, primary text on light backgrounds                   |
+| `--color-slate-900`  | `#262C2F` | Footer                                                        |
+| `--color-slate-800`  | `#323A3D` | Dark panels, primary buttons                                  |
+| `--color-slate-700`  | `#3F484C` | Caption bars and dividers on dark panels                      |
+| `--color-teal-500`   | `#0E8B91` | Accent for large text (headline word, stat figures) and icons |
+| `--color-teal-700`   | `#0B7177` | Links, small accent text, accent button fill                  |
+| `--color-teal-200`   | `#7FD3D3` | Accent on dark panels                                         |
+| `--color-bronze-500` | `#9C7A5E` | Thin lines under panels and cards (decoration only)           |
+| `--color-mist-500`   | `#87919B` | Blue-grey backdrop behind panels and sheets                   |
+| `--color-mist-200`   | `#DBDFE2` | Light grey panels, icon circles                               |
+| `--color-surface`    | `#F5F7F8` | Alternate light section background                            |
+| `--color-white`      | `#FFFFFF` | Sheets and cards                                              |
+| `--color-text`       | `#3A3F43` | Body text                                                     |
+| `--color-text-muted` | `#545D63` | Secondary text                                                |
+| `--color-on-dark`    | `#C7CFD4` | Body text on slate panels                                     |
 
 Contrast (WCAG 2.2):
 
-- On navy 900: white 14.8:1, gold 300 8.6:1, gold 500 4.8:1. All pass AA for body text.
-- Navy text on a gold 500 button: 4.8:1, passes AA.
-- Gold on white: 3.1:1 at best (gold 500), and gold 300 is 1.7:1. **Never use gold for text on light backgrounds.** Use navy for text and links there, and gold only for decoration or as a fill.
+- Ink on white 14:1; ink on mist 200 10.5:1; muted text on mist 200 5:1.
+- Teal 700 on white 5.8:1 (any text). Teal 500 on white 4.1:1: **large text and icons only**.
+- On slate 800: white 11.6:1, teal 200 6.7:1, on-dark grey 7.4:1.
+- Bronze is decoration only; never use it for text.
 
 ### Logo
 
 Files are in `src/assets/brand/`, derived from the owner's originals in `src/assets/brand/source/`:
 
-| File                                         | Use                                                                                                 |
-| -------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `wordmark.png`                               | Header and other light backgrounds ("ReGovern" only; the stacked logo is unreadable at header size) |
-| `wordmark-reversed.png`, `logo-reversed.png` | Dark backgrounds: the navy parts turned white, gold unchanged                                       |
-| `logo.png`                                   | Full stacked logo with the R mark and tagline, on light backgrounds                                 |
-| `mark.png`                                   | The R mark alone. Favicons in `public/` are made from it on a white tile                            |
+| File                                         | Use                                                                      |
+| -------------------------------------------- | ------------------------------------------------------------------------ |
+| `wordmark.png`                               | Header ("ReGovern" only; the stacked logo is unreadable at header size)  |
+| `wordmark-reversed.png`, `logo-reversed.png` | Dark backgrounds such as the footer: navy turned white, gold unchanged   |
+| `logo.png`                                   | Full stacked logo with the R mark and tagline, on light backgrounds      |
+| `mark.png`                                   | The R mark alone. Favicons in `public/` are made from it on a white tile |
 
 TODO(content): ask the designer for SVG versions and a horizontal lockup (mark beside the wordmark); the PNG crops are stand-ins.
 

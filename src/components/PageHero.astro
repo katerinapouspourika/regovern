@@ -1,10 +1,10 @@
 ---
 /*
- * Short banner at the top of inner pages: breadcrumb, title and subtitle
- * over the hero photo.
+ * Banner at the top of inner pages: breadcrumb, title and subtitle over the
+ * skyline photo. The site header floats over its top.
  */
 import { Image } from "astro:assets";
-import heroImage from "@/assets/placeholders/hero.jpg";
+import skyline from "@/assets/placeholders/skyline.jpg";
 import { localizePath, toLocale, useTranslations } from "@/i18n";
 
 interface Props {
@@ -21,9 +21,9 @@ const t = useTranslations(locale);
   {/* TODO(content): replace with a real photo (see src/assets/placeholders/README.md). */}
   <Image
     class="background"
-    src={heroImage}
+    src={skyline}
     alt=""
-    widths={[768, 1280, 1920]}
+    widths={[768, 1280, 1920, 2400]}
     sizes="100vw"
     loading="eager"
   />
@@ -43,28 +43,27 @@ const t = useTranslations(locale);
 
 <style>
   .page-hero {
-    --color-focus: var(--color-gold-300);
-
     position: relative;
     isolation: isolate;
-    padding-block: var(--space-16);
-    color: var(--color-white);
-    background: var(--color-navy-900);
+    padding-block: calc(var(--header-height) + var(--space-16)) var(--space-16);
 
+    /* Light wash on the left keeps the dark text readable over the photo. */
     &::before {
       position: absolute;
       inset: 0;
       z-index: -1;
       content: "";
       background: linear-gradient(
-        100deg,
-        rgb(19 40 71 / 95%) 0%,
-        rgb(19 40 71 / 75%) 100%
+        90deg,
+        rgb(245 247 248 / 92%) 0%,
+        rgb(245 247 248 / 70%) 45%,
+        rgb(245 247 248 / 10%) 80%
       );
     }
 
     @media (width >= 64rem) {
-      padding-block: var(--space-24) var(--space-16);
+      padding-block: calc(var(--header-height) + var(--space-24))
+        var(--space-24);
     }
   }
 
@@ -75,6 +74,7 @@ const t = useTranslations(locale);
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
+    object-position: 70% 40%;
   }
 
   .inner {
@@ -89,27 +89,26 @@ const t = useTranslations(locale);
     padding: 0;
     margin: 0;
     font-size: var(--font-size-sm);
-    color: var(--color-gold-300);
+    color: var(--color-text-muted);
     list-style: none;
 
     li + li::before {
       margin-inline-end: var(--space-2);
-      color: var(--color-surface);
       content: "/";
     }
 
     a {
-      color: var(--color-surface);
+      color: var(--color-teal-700);
     }
   }
 
   h1 {
-    color: var(--color-white);
+    max-inline-size: 18ch;
   }
 
   .subtitle {
-    max-inline-size: 56ch;
+    max-inline-size: 52ch;
     font-size: var(--font-size-lg);
-    color: var(--color-surface);
+    color: var(--color-ink);
   }
 </style>

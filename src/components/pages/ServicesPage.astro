@@ -88,9 +88,10 @@ const t = useTranslations(locale);
     list-style: none;
   }
 
+  /* White cards on the blue-grey backdrop, as on the home page. */
   .overview {
-    padding-block: var(--space-16);
-    background: var(--color-surface);
+    padding-block: var(--space-24);
+    background: var(--color-mist-500);
   }
 
   .card-grid {
@@ -111,10 +112,10 @@ const t = useTranslations(locale);
   }
 
   .detail {
-    padding-block: var(--space-16);
+    padding-block: var(--space-24);
 
     @media (width >= 64rem) {
-      padding-block: var(--space-24);
+      padding-block: var(--space-32);
     }
   }
 
@@ -138,8 +139,8 @@ const t = useTranslations(locale);
     place-items: center;
     inline-size: 5rem;
     block-size: 5rem;
-    color: var(--color-gold-700);
-    border: 1px solid var(--color-gold-500);
+    color: var(--color-teal-500);
+    background: var(--color-mist-200);
     border-radius: 50%;
   }
 
@@ -157,15 +158,16 @@ const t = useTranslations(locale);
     }
   }
 
+  /* Dark panel with bronze base line, as in the reference design. */
   .detail-points {
     padding: var(--space-8);
-    background: var(--color-white);
-    border-inline-start: 3px solid var(--color-gold-500);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+    color: var(--color-on-dark);
+    background: var(--color-slate-800);
+    border-block-end: 2px solid var(--color-bronze-500);
 
     h3 {
       margin-block-end: var(--space-4);
+      color: var(--color-white);
     }
 
     li {
@@ -179,7 +181,7 @@ const t = useTranslations(locale);
         block-size: 0.5rem;
         margin-block-start: 0.6em;
         content: "";
-        background: var(--color-gold-500);
+        background: var(--color-teal-200);
         border-radius: 50%;
       }
     }

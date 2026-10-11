@@ -62,12 +62,8 @@ export const en: UiStrings = {
   "home.hero.eyebrow": "Internal audit · Compliance · Governance",
   "home.hero.title.before": "Internal audit built on",
   "home.hero.title.highlight": "transparency",
-  "home.hero.subtitle":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "home.hero.services": "Our services",
   "home.hero.contact": "Contact us",
-
-  "home.services.heading": "Our services",
 
   "home.overview.eyebrow": "About ReGovern",
   "home.overview.title": "A trusted partner for audit and governance",
@@ -80,27 +76,30 @@ export const en: UiStrings = {
   "home.stats.audits": "audits completed",
   "home.stats.clients": "clients",
 
-  "home.why.eyebrow": "Why ReGovern",
-  "home.why.title": "Why choose us",
-  "home.why.subtitle":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-  "home.why.independence.title": "Independence",
-  "home.why.independence.text":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
-  "home.why.experience.title": "Experience",
-  "home.why.experience.text":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
-  "home.why.confidentiality.title": "Confidentiality",
-  "home.why.confidentiality.text":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
-  "home.why.tailored.title": "Tailored solutions",
-  "home.why.tailored.text":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
-
-  "home.blog.eyebrow": "Blog",
+  "home.about.title": "About us",
+  "home.about.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "home.expertise.title": "Our expertise",
+  "home.overview.more":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+  "home.overview.services": "See our services",
+  "home.process.eyebrow": "Our method",
+  "home.process.title": "How we work",
+  "home.process.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+  "home.process.consultation.title": "Initial consultation",
+  "home.process.consultation.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "home.process.planning.title": "Audit planning",
+  "home.process.planning.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "home.process.fieldwork.title": "Fieldwork",
+  "home.process.fieldwork.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "home.process.reporting.title": "Reporting and follow-up",
+  "home.process.reporting.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   "home.blog.title": "Latest articles",
-  "home.blog.subtitle":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
   "home.blog.all": "All articles",
 
   "cta.title": "Book an introductory meeting",

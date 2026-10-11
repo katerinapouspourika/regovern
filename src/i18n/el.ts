@@ -63,12 +63,8 @@ export const el = {
   "home.hero.eyebrow": "Εσωτερικός έλεγχος · Συμμόρφωση · Διακυβέρνηση",
   "home.hero.title.before": "Εσωτερικός έλεγχος με",
   "home.hero.title.highlight": "διαφάνεια",
-  "home.hero.subtitle":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "home.hero.services": "Οι υπηρεσίες μας",
   "home.hero.contact": "Επικοινωνήστε μαζί μας",
-
-  "home.services.heading": "Οι υπηρεσίες μας",
 
   "home.overview.eyebrow": "Σχετικά με τη ReGovern",
   "home.overview.title":
@@ -82,27 +78,30 @@ export const el = {
   "home.stats.audits": "ολοκληρωμένοι έλεγχοι",
   "home.stats.clients": "πελάτες",
 
-  "home.why.eyebrow": "Γιατί ReGovern",
-  "home.why.title": "Γιατί να μας επιλέξετε",
-  "home.why.subtitle":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-  "home.why.independence.title": "Ανεξαρτησία",
-  "home.why.independence.text":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
-  "home.why.experience.title": "Εμπειρία",
-  "home.why.experience.text":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
-  "home.why.confidentiality.title": "Εχεμύθεια",
-  "home.why.confidentiality.text":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
-  "home.why.tailored.title": "Προσαρμοσμένες λύσεις",
-  "home.why.tailored.text":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
-
-  "home.blog.eyebrow": "Blog",
+  "home.about.title": "Σχετικά με εμάς",
+  "home.about.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "home.expertise.title": "Η εξειδίκευσή μας",
+  "home.overview.more":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+  "home.overview.services": "Δείτε τις υπηρεσίες μας",
+  "home.process.eyebrow": "Η μέθοδός μας",
+  "home.process.title": "Πώς δουλεύουμε",
+  "home.process.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+  "home.process.consultation.title": "Αρχική συνάντηση",
+  "home.process.consultation.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "home.process.planning.title": "Σχεδιασμός ελέγχου",
+  "home.process.planning.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "home.process.fieldwork.title": "Διενέργεια ελέγχου",
+  "home.process.fieldwork.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "home.process.reporting.title": "Αναφορά και παρακολούθηση",
+  "home.process.reporting.text":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   "home.blog.title": "Πρόσφατα άρθρα",
-  "home.blog.subtitle":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
   "home.blog.all": "Όλα τα άρθρα",
 
   "cta.title": "Κλείστε μια συνάντηση γνωριμίας",

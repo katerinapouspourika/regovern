@@ -2,16 +2,16 @@
 /*
  * Home page body, shared by the Greek (src/pages/index.astro) and English
  * (src/pages/en/index.astro) routes. The language comes from the URL.
+ * Layout follows the client's reference design 1 (docs/brief.md).
  */
 import { Image } from "astro:assets";
-import heroImage from "@/assets/placeholders/hero.jpg";
+import facadeImage from "@/assets/placeholders/hero.jpg";
 import officeImage from "@/assets/placeholders/office.jpg";
-import BlogCard from "@/components/BlogCard.astro";
+import skylineImage from "@/assets/placeholders/skyline.jpg";
 import Button from "@/components/Button.astro";
 import CtaBand from "@/components/CtaBand.astro";
 import Icon, { type IconName } from "@/components/Icon.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
-import ServiceCard from "@/components/ServiceCard.astro";
 import StatCounter from "@/components/StatCounter.astro";
 import { services } from "@/data/services";
 import {
@@ -34,30 +34,30 @@ const stats: readonly { value: number; label: UiKey }[] = [
   { value: 80, label: "home.stats.clients" },
 ];
 
-const reasons: readonly { icon: IconName; title: UiKey; text: UiKey }[] = [
+const steps: readonly { icon: IconName; title: UiKey; text: UiKey }[] = [
   {
-    icon: "compass",
-    title: "home.why.independence.title",
-    text: "home.why.independence.text",
-  },
-  {
-    icon: "award",
-    title: "home.why.experience.title",
-    text: "home.why.experience.text",
-  },
-  {
-    icon: "lock",
-    title: "home.why.confidentiality.title",
-    text: "home.why.confidentiality.text",
+    icon: "message",
+    title: "home.process.consultation.title",
+    text: "home.process.consultation.text",
   },
   {
     icon: "target",
-    title: "home.why.tailored.title",
-    text: "home.why.tailored.text",
+    title: "home.process.planning.title",
+    text: "home.process.planning.text",
+  },
+  {
+    icon: "clipboard-check",
+    title: "home.process.fieldwork.title",
+    text: "home.process.fieldwork.text",
+  },
+  {
+    icon: "file-text",
+    title: "home.process.reporting.title",
+    text: "home.process.reporting.text",
   },
 ];
 
-const latestPosts = (await getPosts(locale)).slice(0, 3);
+const latestPosts = (await getPosts(locale)).slice(0, 2);
 ---
 
 <BaseLayout
@@ -68,163 +68,171 @@ const latestPosts = (await getPosts(locale)).slice(0, 3);
     {/* TODO(content): replace with a real photo (see src/assets/placeholders/README.md). */}
     <Image
       class="hero-image"
-      src={heroImage}
+      src={skylineImage}
       alt=""
-      widths={[768, 1280, 1920]}
+      widths={[768, 1280, 1920, 2400]}
       sizes="100vw"
       loading="eager"
       fetchpriority="high"
     />
     <div class="container hero-inner">
-      <p class="eyebrow">{t("home.hero.eyebrow")}</p>
       <h1 id="hero-title">
         {t("home.hero.title.before")}{" "}
         <span class="highlight">{t("home.hero.title.highlight")}</span>
       </h1>
-      <p class="subtitle">{t("home.hero.subtitle")}</p>
+      <p class="tagline">{t("home.hero.eyebrow")}</p>
       <div class="actions">
         <Button href={localizePath("/services/", locale)}>
           {t("home.hero.services")}
         </Button>
-        <Button
-          href={localizePath("/contact/", locale)}
-          variant="outline-light"
-        >
+        <Button href={localizePath("/contact/", locale)} variant="outline-dark">
           {t("home.hero.contact")}
         </Button>
       </div>
     </div>
   </section>
 
-  <section class="services" aria-labelledby="services-title">
-    <div class="container">
-      <h2 id="services-title" class="visually-hidden">
-        {t("home.services.heading")}
-      </h2>
-      <ul class="service-grid">
-        {services.map((service) => (
-          <li>
-            <ServiceCard
-              icon={service.icon}
-              title={t(service.title)}
-              summary={t(service.summary)}
-              href={`${localizePath("/services/", locale)}#${service.id}`}
-              linkText={t("services.more")}
-            />
-          </li>
-        ))}
-      </ul>
+  {/* Three panels that overlap the bottom of the hero on large screens. */}
+  <div class="panels">
+    <div class="container panel-grid">
+      <section class="panel dark about" aria-labelledby="about-title">
+        <h2 id="about-title">{t("home.about.title")}</h2>
+        <p>{t("home.about.text")}</p>
+        <a class="more" href={localizePath("/about/", locale)}>
+          {t("home.overview.link")}
+          <Icon name="arrow-right" size={18} />
+        </a>
+        {/* TODO(content): replace with a real photo. */}
+        <Image
+          class="about-image"
+          src={facadeImage}
+          alt=""
+          widths={[400, 800]}
+          sizes="(min-width: 64rem) 22rem, 100vw"
+        />
+      </section>
+
+      <section class="panel light expertise" aria-labelledby="expertise-title">
+        <h2 id="expertise-title">{t("home.expertise.title")}</h2>
+        <ul class="expertise-grid">
+          {services.map((service) => (
+            <li>
+              <Icon name={service.icon} size={30} />
+              <h3>
+                <a href={`${localizePath("/services/", locale)}#${service.id}`}>
+                  {t(service.title)}
+                </a>
+              </h3>
+              <p>{t(service.summary)}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="panel dark recent" aria-labelledby="recent-title">
+        <h2 id="recent-title">{t("home.blog.title")}</h2>
+        <ul class="recent-list">
+          {latestPosts.map((post) => (
+            <li>
+              <Image
+                src={post.data.cover}
+                alt=""
+                widths={[400, 800]}
+                sizes="(min-width: 64rem) 20rem, 100vw"
+              />
+              <a href={localizePath(postPath(post), locale)}>
+                {post.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a class="more" href={localizePath("/blog/", locale)}>
+          {t("home.blog.all")}
+          <Icon name="arrow-right" size={18} />
+        </a>
+      </section>
     </div>
-  </section>
+  </div>
 
   <section class="overview" aria-labelledby="overview-title">
-    <div class="container overview-inner">
-      <div class="overview-text">
-        <SectionHeading
-          id="overview-title"
-          eyebrow={t("home.overview.eyebrow")}
-          title={t("home.overview.title")}
-          align="start"
-        />
-        <p>{t("home.overview.text")}</p>
-        <dl class="stats" aria-label={t("home.stats.label")}>
-          {stats.map(({ value, label }) => (
-            <StatCounter
-              value={`+${formatNumber(value, locale)}`}
-              label={t(label)}
-            />
-          ))}
-        </dl>
-        <Button href={localizePath("/about/", locale)} variant="outline-dark">
-          {t("home.overview.link")}
-        </Button>
-      </div>
-      <div class="overview-media">
+    <div class="container">
+      <div class="sheet">
+        <div class="overview-text">
+          <SectionHeading
+            id="overview-title"
+            eyebrow={t("home.overview.eyebrow")}
+            title={t("home.overview.title")}
+          />
+          <p>{t("home.overview.text")}</p>
+          <dl class="stats" aria-label={t("home.stats.label")}>
+            {stats.map(({ value, label }) => (
+              <StatCounter
+                value={`+${formatNumber(value, locale)}`}
+                label={t(label)}
+              />
+            ))}
+          </dl>
+          <p>{t("home.overview.more")}</p>
+          <Button
+            href={localizePath("/services/", locale)}
+            variant="outline-dark"
+          >
+            {t("home.overview.services")}
+          </Button>
+        </div>
         {/* TODO(content): replace with a real photo (see src/assets/placeholders/README.md). */}
         <Image
+          class="overview-image"
           src={officeImage}
           alt={t("home.overview.imageAlt")}
           widths={[480, 960]}
-          sizes="(min-width: 64rem) 34rem, 100vw"
+          sizes="(min-width: 64rem) 32rem, 100vw"
         />
       </div>
     </div>
   </section>
 
-  <section class="why" aria-labelledby="why-title">
+  <section class="process" aria-labelledby="process-title">
     <div class="container">
       <SectionHeading
-        id="why-title"
-        eyebrow={t("home.why.eyebrow")}
-        title={t("home.why.title")}
-        subtitle={t("home.why.subtitle")}
-        tone="light"
+        id="process-title"
+        eyebrow={t("home.process.eyebrow")}
+        title={t("home.process.title")}
+        subtitle={t("home.process.subtitle")}
       />
-      <ul class="reasons">
-        {reasons.map(({ icon, title, text }) => (
+      <ol class="steps">
+        {steps.map(({ icon, title, text }) => (
           <li>
-            <span class="reason-icon">
-              <Icon name={icon} size={32} />
+            <span class="step-icon">
+              <Icon name={icon} size={28} />
             </span>
             <h3>{t(title)}</h3>
             <p>{t(text)}</p>
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   </section>
-
-  {latestPosts.length > 0 && (
-    <section class="blog" aria-labelledby="blog-title">
-      <div class="container">
-        <SectionHeading
-          id="blog-title"
-          eyebrow={t("home.blog.eyebrow")}
-          title={t("home.blog.title")}
-          subtitle={t("home.blog.subtitle")}
-        />
-        <ul class="post-grid">
-          {latestPosts.map((post) => (
-            <li>
-              <BlogCard
-                href={localizePath(postPath(post), locale)}
-                title={post.data.title}
-                description={post.data.description}
-                date={post.data.date}
-                cover={post.data.cover}
-                coverAlt={post.data.coverAlt}
-              />
-            </li>
-          ))}
-        </ul>
-        <div class="blog-all">
-          <Button href={localizePath("/blog/", locale)} variant="outline-dark">
-            {t("home.blog.all")}
-          </Button>
-        </div>
-      </div>
-    </section>
-  )}
 
   <CtaBand />
 </BaseLayout>
 
 <style>
-  ul {
+  ul,
+  ol {
     padding: 0;
     margin: 0;
     list-style: none;
   }
 
-  /* Hero: photo under a navy overlay so white text stays legible. */
+  /* Hero: bright skyline photo with a light wash behind the text. */
   .hero {
-    --color-focus: var(--color-gold-300);
-
     position: relative;
     isolation: isolate;
-    padding-block: var(--space-24) var(--space-16);
-    color: var(--color-white);
-    background: var(--color-navy-900);
+    display: grid;
+    align-items: center;
+    min-block-size: min(46rem, 100svh);
+    padding-block: calc(var(--header-height) + var(--space-16)) var(--space-16);
 
     &::before {
       position: absolute;
@@ -232,16 +240,17 @@ const latestPosts = (await getPosts(locale)).slice(0, 3);
       z-index: -1;
       content: "";
       background: linear-gradient(
-        100deg,
-        rgb(19 40 71 / 95%) 0%,
-        rgb(19 40 71 / 80%) 55%,
-        rgb(19 40 71 / 55%) 100%
+        90deg,
+        rgb(245 247 248 / 88%) 0%,
+        rgb(245 247 248 / 60%) 40%,
+        rgb(245 247 248 / 0%) 70%
       );
     }
 
-    /* Leave room for the service cards that overlap the bottom edge. */
+    /* Leave room for the panels that overlap the bottom edge. */
     @media (width >= 64rem) {
-      padding-block: var(--space-24) calc(var(--space-24) + var(--space-16));
+      min-block-size: 52rem;
+      padding-block-end: calc(var(--space-32) + var(--space-16));
     }
   }
 
@@ -252,6 +261,7 @@ const latestPosts = (await getPosts(locale)).slice(0, 3);
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
+    object-position: 70% 50%;
   }
 
   .hero-inner {
@@ -260,80 +270,230 @@ const latestPosts = (await getPosts(locale)).slice(0, 3);
     justify-items: start;
   }
 
-  .eyebrow {
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    color: var(--color-gold-300);
-    letter-spacing: 0.04em;
-  }
-
   h1 {
-    max-inline-size: 18ch;
-    color: var(--color-white);
+    max-inline-size: 14ch;
   }
 
   .highlight {
-    color: var(--color-gold-300);
+    color: var(--color-teal-500);
   }
 
-  .subtitle {
-    max-inline-size: 56ch;
-    font-size: var(--font-size-lg);
-    color: var(--color-surface);
+  .tagline {
+    font-size: var(--font-size-xl);
+    color: var(--color-ink);
   }
 
   .actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-4);
-    margin-block-start: var(--space-2);
+    margin-block-start: var(--space-4);
   }
 
-  /* Service cards: stacked below the hero on small screens, overlapping it on large ones. */
-  .services {
-    padding-block: var(--space-12) var(--space-8);
-    background: var(--color-surface);
+  /* Panels: dark, light (raised) and dark, as in the reference design. */
+  .panels {
+    /* Positioned so the panels paint above the hero they overlap. */
+    position: relative;
+    z-index: 1;
+    padding-block: var(--space-12) 0;
+    background: var(--color-mist-500);
 
     @media (width >= 64rem) {
       padding-block: 0;
       background: linear-gradient(
         to bottom,
-        transparent 0 50%,
-        var(--color-white) 50%
+        transparent 0 calc(var(--space-32) + var(--space-8)),
+        var(--color-mist-500) calc(var(--space-32) + var(--space-8))
       );
     }
   }
 
-  .service-grid {
+  .panel-grid {
     display: grid;
     gap: var(--space-6);
 
-    @media (width >= 40rem) {
-      grid-template-columns: repeat(2, 1fr);
+    @media (width >= 64rem) {
+      grid-template-columns: 1fr 1.15fr 1fr;
+      gap: 0;
+      align-items: start;
+      margin-block-start: calc(-1 * (var(--space-32) + var(--space-8)));
+    }
+  }
+
+  .panel {
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+    padding: var(--space-8);
+
+    h2 {
+      font-size: var(--font-size-2xl);
+    }
+  }
+
+  .dark {
+    --color-focus: var(--color-teal-200);
+
+    color: var(--color-on-dark);
+    background: var(--color-slate-800);
+
+    h2 {
+      color: var(--color-white);
     }
 
     @media (width >= 64rem) {
-      grid-template-columns: repeat(4, 1fr);
-      margin-block-start: calc(-1 * (var(--space-24) + var(--space-4)));
+      min-block-size: 30rem;
+    }
+  }
+
+  .light {
+    position: relative;
+    z-index: 1;
+    padding: var(--space-12) var(--space-8);
+    background: var(--color-mist-200);
+    border-block-end: 2px solid var(--color-bronze-500);
+    box-shadow: var(--shadow-raised);
+
+    @media (width >= 64rem) {
+      margin-block: calc(-1 * var(--space-6)) calc(-1 * var(--space-12));
+    }
+  }
+
+  .more {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    justify-self: start;
+    font-weight: 600;
+    color: var(--color-teal-200);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .about-image {
+    inline-size: calc(100% + 2 * var(--space-8));
+    max-inline-size: none;
+    margin: var(--space-4) calc(-1 * var(--space-8)) calc(-1 * var(--space-8));
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  /* Two-by-two grid of services with hairline dividers. */
+  .expertise-grid {
+    display: grid;
+    margin-block-start: var(--space-4);
+
+    @media (width >= 30rem) {
+      grid-template-columns: 1fr 1fr;
     }
 
     li {
       display: grid;
+      gap: var(--space-2);
+      align-content: start;
+      padding: var(--space-6) var(--space-4);
+      color: var(--color-teal-500);
+      border-block-start: 1px solid rgb(42 44 46 / 15%);
+    }
+
+    h3 {
+      font-family: var(--font-sans);
+      font-size: var(--font-size-base);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    a {
+      color: var(--color-ink);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    p {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
     }
   }
 
-  .overview {
-    padding-block: var(--space-16) var(--space-24);
+  @media (width >= 30rem) {
+    .expertise-grid li:nth-child(-n + 2) {
+      border-block-start: 0;
+    }
+
+    .expertise-grid li:nth-child(even) {
+      border-inline-start: 1px solid rgb(42 44 46 / 15%);
+    }
   }
 
-  .overview-inner {
+  .recent-list {
+    display: grid;
+    gap: var(--space-4);
+
+    li {
+      position: relative;
+      overflow: hidden;
+      border-block-end: 2px solid var(--color-bronze-500);
+    }
+
+    img {
+      inline-size: 100%;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+    }
+
+    /* Caption bar under the photo; the link covers the whole item. */
+    a {
+      display: block;
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--font-size-sm);
+      color: var(--color-white);
+      text-decoration: none;
+      background: var(--color-slate-700);
+
+      &::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  /* Company overview: a white sheet on the blue-grey backdrop. */
+  .overview {
+    padding-block: var(--space-24);
+    background: var(--color-mist-500);
+
+    @media (width >= 64rem) {
+      padding-block: var(--space-32) var(--space-24);
+    }
+  }
+
+  .sheet {
     display: grid;
     gap: var(--space-12);
     align-items: center;
+    padding: var(--space-12) var(--space-6);
+    background: var(--color-white);
+    border-block-end: 2px solid var(--color-bronze-500);
+
+    @media (width >= 48rem) {
+      padding: var(--space-16);
+    }
 
     @media (width >= 64rem) {
       grid-template-columns: 1fr 1fr;
       gap: var(--space-16);
+      padding: var(--space-24) var(--space-16);
     }
   }
 
@@ -342,63 +502,37 @@ const latestPosts = (await getPosts(locale)).slice(0, 3);
     gap: var(--space-6);
     justify-items: start;
 
-    > p {
-      color: var(--color-text-muted);
-    }
-
-    /* The grid gap already spaces the heading. */
     > :global(.section-heading) {
       margin-block-end: 0;
+    }
+
+    > p {
+      max-inline-size: 60ch;
+      color: var(--color-text-muted);
     }
   }
 
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
-    gap: var(--space-6);
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: var(--space-8);
     inline-size: 100%;
-    margin: 0;
+    margin-block: var(--space-4);
   }
 
-  .overview-media {
-    --frame-offset: var(--space-2);
-
-    position: relative;
-    isolation: isolate;
-    margin-inline-end: var(--frame-offset);
-
-    @media (width >= 64rem) {
-      --frame-offset: var(--space-4);
-    }
-
-    /* Gold frame offset behind the photo. */
-    &::before {
-      position: absolute;
-      inset: var(--space-6) calc(-1 * var(--frame-offset))
-        calc(-1 * var(--frame-offset)) var(--space-6);
-      z-index: -1;
-      content: "";
-      border: 2px solid var(--color-gold-500);
-      border-radius: var(--radius-lg);
-    }
-
-    img {
-      inline-size: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      border-radius: var(--radius-lg);
-    }
+  .overview-image {
+    inline-size: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
   }
 
-  .why {
-    --color-focus: var(--color-gold-300);
-
-    padding-block: var(--space-24);
-    color: var(--color-surface);
-    background: var(--color-navy-900);
+  /* How we work: four steps joined by a line on large screens. */
+  .process {
+    padding-block: var(--space-32) var(--space-8);
   }
 
-  .reasons {
+  .steps {
     display: grid;
     gap: var(--space-12) var(--space-8);
 
@@ -411,53 +545,42 @@ const latestPosts = (await getPosts(locale)).slice(0, 3);
     }
 
     li {
+      position: relative;
       display: grid;
       gap: var(--space-3);
-      justify-items: center;
-      text-align: center;
+      align-content: start;
+    }
+
+    @media (width >= 64rem) {
+      li:not(:last-child)::after {
+        position: absolute;
+        inset-block-start: 2.25rem;
+        inset-inline: calc(4.5rem + var(--space-4)) calc(-1 * var(--space-4));
+        block-size: 1px;
+        content: "";
+        background: var(--color-mist-500);
+      }
     }
 
     h3 {
-      color: var(--color-white);
+      margin-block-start: var(--space-3);
+      font-family: var(--font-sans);
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--color-text-muted);
     }
   }
 
-  .reason-icon {
+  .step-icon {
     display: grid;
     place-items: center;
     inline-size: 4.5rem;
     block-size: 4.5rem;
-    margin-block-end: var(--space-2);
-    color: var(--color-gold-300);
-    border: 1px solid var(--color-gold-500);
+    color: var(--color-ink);
+    background: var(--color-mist-200);
     border-radius: 50%;
-  }
-
-  .blog {
-    padding-block: var(--space-24);
-    background: var(--color-surface);
-  }
-
-  .post-grid {
-    display: grid;
-    gap: var(--space-8);
-
-    @media (width >= 40rem) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (width >= 64rem) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    li {
-      display: grid;
-    }
-  }
-
-  .blog-all {
-    display: flex;
-    justify-content: center;
-    margin-block-start: var(--space-12);
   }
 </style>
