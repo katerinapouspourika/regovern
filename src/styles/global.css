@@ -178,6 +178,7 @@
     /* Layout */
     --container-max: 75rem;
     --container-gutter: var(--space-4);
+    --header-height: 4.5rem;
 
     /* Shape and depth */
     --radius: 0.375rem;
@@ -202,6 +203,9 @@
 @layer base {
   html {
     text-size-adjust: 100%;
+
+    /* Anchored sections are not hidden under the sticky header. */
+    scroll-padding-block-start: calc(var(--header-height) + var(--space-4));
 
     @media (prefers-reduced-motion: no-preference) {
       scroll-behavior: smooth;

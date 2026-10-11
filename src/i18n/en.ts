@@ -122,6 +122,36 @@ export const en: UiStrings = {
   "services.governance.summary":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
   "services.more": "Learn more",
+  "services.meta.title": "Services | ReGovern",
+  "services.meta.description":
+    "Internal audit, risk management, regulatory compliance and governance advisory from ReGovern.",
+  "services.hero.title": "Our services",
+  "services.hero.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+  "services.overview.title": "What we offer",
+  "services.offers": "What it includes",
+  "services.internalAudit.description":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+  "services.internalAudit.point1": "Lorem ipsum dolor sit amet",
+  "services.internalAudit.point2": "Consectetur adipiscing elit",
+  "services.internalAudit.point3": "Sed do eiusmod tempor incididunt",
+  "services.risk.description":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+  "services.risk.point1": "Lorem ipsum dolor sit amet",
+  "services.risk.point2": "Consectetur adipiscing elit",
+  "services.risk.point3": "Sed do eiusmod tempor incididunt",
+  "services.compliance.description":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+  "services.compliance.point1": "Lorem ipsum dolor sit amet",
+  "services.compliance.point2": "Consectetur adipiscing elit",
+  "services.compliance.point3": "Sed do eiusmod tempor incididunt",
+  "services.governance.description":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+  "services.governance.point1": "Lorem ipsum dolor sit amet",
+  "services.governance.point2": "Consectetur adipiscing elit",
+  "services.governance.point3": "Sed do eiusmod tempor incididunt",
+
+  "breadcrumb.label": "Breadcrumb",
 
   "blog.readMore": "Read more",
 };
