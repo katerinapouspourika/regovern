@@ -1,4 +1,4 @@
-# Cloudflare Pages response headers.
+# Cloudflare response headers (supported by Workers static assets and Pages).
 # TODO(launch): remove the noindex rule when the site goes live on its real
 # domain; until then search engines must not index previews.
 /*
