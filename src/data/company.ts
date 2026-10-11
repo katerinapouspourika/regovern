@@ -13,3 +13,11 @@ export const company = {
 /** The phone number in the form a `tel:` link needs (no spaces). */
 export const phoneHref = `tel:${company.phone.replace(/\s/g, "")}`;
 export const emailHref = `mailto:${company.email}`;
+
+/**
+ * Link to the office on Google Maps. A plain link sets no cookies; an
+ * embedded map would need cookie consent first.
+ */
+export function mapsHref(address: string): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}

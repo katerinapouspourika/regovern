@@ -30,6 +30,39 @@ export const en: UiStrings = {
   "contact.email": "Email",
   "contact.address": "Address",
   "contact.hours": "Office hours",
+  // TODO(content): real Contact page text.
+  "contact.meta.title": "Contact us | ReGovern",
+  "contact.meta.description":
+    "Contact ReGovern about internal audit, risk management and regulatory compliance services.",
+  "contact.hero.title": "Contact us",
+  "contact.hero.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+  "contact.form.title": "Send us a message",
+  "contact.form.required": "Fields marked * are required.",
+  "contact.form.name": "Full name",
+  "contact.form.email": "Email",
+  "contact.form.phone": "Phone",
+  "contact.form.company": "Company",
+  "contact.form.message": "Message",
+  "contact.form.consent.before": "I have read the",
+  "contact.form.consent.link": "privacy policy",
+  "contact.form.consent.after":
+    "and agree to my details being used to answer my message.",
+  "contact.form.submit": "Send message",
+  "contact.form.error.required": "Fill in this field.",
+  "contact.form.error.email":
+    "Enter a valid email address, for example name@company.com.",
+  "contact.form.error.consent":
+    "To send your message, accept the privacy policy.",
+  "contact.form.success.title": "Thank you for your message",
+  "contact.form.success.text": "We will get back to you as soon as possible.",
+  "contact.form.success.demo":
+    "Demo version: the form does not send messages yet.",
+  "contact.form.success.again": "Send another message",
+  "contact.details.title": "Contact details",
+  "contact.map.open": "Open in Google Maps",
+  "contact.map.alt": "Map showing the location of the ReGovern office",
+  "link.newTab": "(opens in a new tab)",
 
   // TODO(content): real legal name, address and office hours.
   "company.legalName": "ReGovern P.C.",

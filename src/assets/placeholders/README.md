@@ -14,3 +14,4 @@ made because the build environment could not reach Unsplash or Pexels.
 | `office.jpg`        | Home company overview photo             | Generated |
 | `blog-*.jpg`        | Placeholder blog post covers            | Generated |
 | `team/member-*.jpg` | Team portraits on the About us page     | Generated |
+| `map.jpg`           | Static map on the Contact page          | Generated |
