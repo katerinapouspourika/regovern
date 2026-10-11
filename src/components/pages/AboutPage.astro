@@ -1,0 +1,273 @@
+---
+/*
+ * About us page body, shared by src/pages/about.astro (Greek) and
+ * src/pages/en/about.astro (English).
+ */
+import { Image } from "astro:assets";
+import officeImage from "@/assets/placeholders/office.jpg";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon, { type IconName } from "@/components/Icon.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import StatCounter from "@/components/StatCounter.astro";
+import TeamCard from "@/components/TeamCard.astro";
+import { stats } from "@/data/stats";
+import { team } from "@/data/team";
+import { formatNumber, toLocale, useTranslations, type UiKey } from "@/i18n";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const locale = toLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+// TODO(content): confirm the company's values.
+const values: readonly { icon: IconName; title: UiKey; text: UiKey }[] = [
+  {
+    icon: "compass",
+    title: "about.values.independence.title",
+    text: "about.values.independence.text",
+  },
+  {
+    icon: "scale",
+    title: "about.values.integrity.title",
+    text: "about.values.integrity.text",
+  },
+  {
+    icon: "lock",
+    title: "about.values.confidentiality.title",
+    text: "about.values.confidentiality.text",
+  },
+  {
+    icon: "award",
+    title: "about.values.excellence.title",
+    text: "about.values.excellence.text",
+  },
+];
+---
+
+<BaseLayout
+  title={t("about.meta.title")}
+  description={t("about.meta.description")}
+>
+  <PageHero title={t("about.hero.title")} subtitle={t("about.hero.subtitle")} />
+
+  <section class="story" aria-labelledby="story-title">
+    <div class="container story-inner">
+      <div class="story-text">
+        <SectionHeading
+          id="story-title"
+          eyebrow={t("about.story.eyebrow")}
+          title={t("about.story.title")}
+        />
+        <p>{t("about.story.text1")}</p>
+        <p>{t("about.story.text2")}</p>
+      </div>
+      {/* TODO(content): replace with a real photo (see src/assets/placeholders/README.md). */}
+      <Image
+        class="story-image"
+        src={officeImage}
+        alt={t("about.story.imageAlt")}
+        widths={[480, 960]}
+        sizes="(min-width: 64rem) 32rem, 100vw"
+      />
+    </div>
+  </section>
+
+  {/* Stats and values: a white sheet on the blue-grey backdrop, as on the home page. */}
+  <section class="values" aria-labelledby="values-title">
+    <div class="container">
+      <div class="sheet">
+        <dl class="stats" aria-label={t("home.stats.label")}>
+          {stats.map(({ value, label }) => (
+            <StatCounter
+              value={`+${formatNumber(value, locale)}`}
+              label={t(label)}
+            />
+          ))}
+        </dl>
+        <SectionHeading
+          id="values-title"
+          eyebrow={t("about.values.eyebrow")}
+          title={t("about.values.title")}
+        />
+        <ul class="value-grid">
+          {values.map(({ icon, title, text }) => (
+            <li>
+              <span class="value-icon">
+                <Icon name={icon} size={28} />
+              </span>
+              <h3>{t(title)}</h3>
+              <p>{t(text)}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="team" aria-labelledby="team-title">
+    <div class="container">
+      <SectionHeading
+        id="team-title"
+        eyebrow={t("about.team.eyebrow")}
+        title={t("about.team.title")}
+        subtitle={t("about.team.subtitle")}
+      />
+      <ul class="team-grid">
+        {team.map((member) => (
+          <li>
+            <TeamCard
+              photo={member.photo}
+              name={t(member.name)}
+              role={t(member.role)}
+              bio={t(member.bio)}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .story {
+    padding-block: var(--space-24);
+
+    @media (width >= 64rem) {
+      padding-block: var(--space-32);
+    }
+  }
+
+  .story-inner {
+    display: grid;
+    gap: var(--space-12);
+    align-items: center;
+
+    @media (width >= 64rem) {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+    }
+  }
+
+  .story-text {
+    display: grid;
+    gap: var(--space-6);
+
+    > :global(.section-heading) {
+      margin-block-end: 0;
+    }
+
+    > p {
+      max-inline-size: 60ch;
+      color: var(--color-text-muted);
+    }
+  }
+
+  .story-image {
+    inline-size: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .values {
+    padding-block: var(--space-24);
+    background: var(--color-mist-500);
+  }
+
+  .sheet {
+    display: grid;
+    padding: var(--space-12) var(--space-6);
+    background: var(--color-white);
+    border-block-end: 2px solid var(--color-bronze-500);
+
+    @media (width >= 48rem) {
+      padding: var(--space-16);
+    }
+
+    @media (width >= 64rem) {
+      padding: var(--space-24) var(--space-16);
+    }
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: var(--space-8);
+    padding-block-end: var(--space-16);
+    margin: 0 0 var(--space-16);
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .value-grid {
+    display: grid;
+    gap: var(--space-12) var(--space-8);
+
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    li {
+      display: grid;
+      gap: var(--space-3);
+      align-content: start;
+    }
+
+    h3 {
+      margin-block-start: var(--space-2);
+      font-family: var(--font-sans);
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--color-text-muted);
+    }
+  }
+
+  .value-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 4rem;
+    block-size: 4rem;
+    color: var(--color-teal-500);
+    background: var(--color-mist-200);
+    border-radius: 50%;
+  }
+
+  .team {
+    padding-block: var(--space-24) var(--space-8);
+
+    @media (width >= 64rem) {
+      padding-block-start: var(--space-32);
+    }
+  }
+
+  .team-grid {
+    display: grid;
+    gap: var(--space-8);
+
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    li {
+      display: grid;
+    }
+  }
+</style>

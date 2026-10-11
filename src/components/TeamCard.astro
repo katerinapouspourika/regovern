@@ -1,0 +1,64 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  photo: ImageMetadata;
+  name: string;
+  role: string;
+  bio: string;
+}
+
+const { photo, name, role, bio } = Astro.props;
+---
+
+<article class="team-card">
+  {/* The name is right below, so the photo needs no description. */}
+  <Image
+    src={photo}
+    alt=""
+    widths={[320, 640]}
+    sizes="(min-width: 64rem) 17rem, (min-width: 40rem) 50vw, 100vw"
+  />
+  <div class="body">
+    <h3>{name}</h3>
+    <p class="role">{role}</p>
+    <p class="bio">{bio}</p>
+  </div>
+</article>
+
+<style>
+  .team-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+    background: var(--color-white);
+    border-block-end: 2px solid var(--color-bronze-500);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    box-shadow: var(--shadow-card);
+  }
+
+  img {
+    inline-size: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .body {
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+    padding: var(--space-6);
+  }
+
+  .role {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-teal-700);
+  }
+
+  .bio {
+    margin-block-start: var(--space-2);
+    color: var(--color-text-muted);
+  }
+</style>
