@@ -46,20 +46,39 @@ Common patterns to reproduce:
 
 ### Colours
 
-The ReGovern logo uses **navy and gold**, so the site follows the logo. Teal from the references is not used. Final values will be sampled from the logo file once it is in the repo; until then use:
+The ReGovern logo uses **navy and gold**, so the site follows the logo. Teal from the references is not used. Values are sampled from the logo file (`src/assets/brand/source/`):
 
-| Token                | Value     | Use                                       |
-| -------------------- | --------- | ----------------------------------------- |
-| `--color-navy-900`   | `#0B1F3A` | Hero, dark sections, footer               |
-| `--color-navy-700`   | `#1C2E4A` | Cards and panels on dark sections         |
-| `--color-gold-500`   | `#C9A227` | Accent: buttons, highlighted words, icons |
-| `--color-gold-300`   | `#E3C770` | Hover states, accents on navy             |
-| `--color-surface`    | `#F4F6F9` | Light section background                  |
-| `--color-white`      | `#FFFFFF` | Cards on light sections                   |
-| `--color-text`       | `#1E2733` | Body text on light backgrounds            |
-| `--color-text-muted` | `#5B6676` | Secondary text                            |
+| Token                | Value                | Use                                                                         |
+| -------------------- | -------------------- | --------------------------------------------------------------------------- |
+| `--color-navy-900`   | `#132847`            | Logo navy. Hero, dark sections, footer, text and links on light backgrounds |
+| `--color-navy-700`   | `#213B60`            | Cards and panels on dark sections                                           |
+| `--color-gold-700`   | `#A07B38`            | Dark end of the logo's gold gradient                                        |
+| `--color-gold-500`   | `#B48C49`            | Accent: buttons, highlighted words, icons                                   |
+| `--color-gold-300`   | `#E6C07F`            | Light end of the gradient. Hover states, accents on navy                    |
+| `--gradient-gold`    | gold 300 → 500 → 700 | Decorative gold, as in the logo                                             |
+| `--color-surface`    | `#F4F6F9`            | Light section background                                                    |
+| `--color-white`      | `#FFFFFF`            | Cards on light sections                                                     |
+| `--color-text`       | `#1E2733`            | Body text on light backgrounds                                              |
+| `--color-text-muted` | `#5B6676`            | Secondary text                                                              |
 
-Contrast rule: gold works on navy and as a button fill with navy text, but gold text on white fails WCAG contrast. On light backgrounds use navy for text and links, and gold only for decoration or as a fill.
+Contrast (WCAG 2.2):
+
+- On navy 900: white 14.8:1, gold 300 8.6:1, gold 500 4.8:1. All pass AA for body text.
+- Navy text on a gold 500 button: 4.8:1, passes AA.
+- Gold on white: 3.1:1 at best (gold 500), and gold 300 is 1.7:1. **Never use gold for text on light backgrounds.** Use navy for text and links there, and gold only for decoration or as a fill.
+
+### Logo
+
+Files are in `src/assets/brand/`, derived from the owner's originals in `src/assets/brand/source/`:
+
+| File                                         | Use                                                                                                 |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `wordmark.png`                               | Header and other light backgrounds ("ReGovern" only; the stacked logo is unreadable at header size) |
+| `wordmark-reversed.png`, `logo-reversed.png` | Dark backgrounds: the navy parts turned white, gold unchanged                                       |
+| `logo.png`                                   | Full stacked logo with the R mark and tagline, on light backgrounds                                 |
+| `mark.png`                                   | The R mark alone. Favicons in `public/` are made from it on a white tile                            |
+
+TODO(content): ask the designer for SVG versions and a horizontal lockup (mark beside the wordmark); the PNG crops are stand-ins.
 
 ### Typography
 
@@ -96,7 +115,8 @@ Placeholder photos come from free stock libraries (Unsplash, Pexels): architectu
 
 ## Open questions
 
-- [ ] Final brand colours and fonts, from the logo file. **Owner will add the logo to the repo.**
+- [x] Brand colours, sampled from the logo. See **Colours**.
+- [ ] Vector (SVG) logo files and a horizontal lockup, from the designer.
 - [x] Language: both Greek (default) and English. See **Languages**.
 - [ ] Real content: page text, services list, team, stats, contact details, address, legal company details, starter blog posts, photos.
 - [ ] Contact form service (Formspree, Web3Forms, Netlify Forms) and the receiving inbox. After approval.
