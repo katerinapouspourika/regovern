@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from "astro:content";
-import type { Locale } from "@/i18n";
+import { locales, localizePath, type Locale } from "@/i18n";
 
 export type BlogPost = CollectionEntry<"blog">;
 
@@ -20,4 +20,21 @@ export async function getPosts(locale: Locale): Promise<BlogPost[]> {
     (post) => post.id.startsWith(`${locale}/`) && !post.data.draft,
   );
   return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+}
+
+/**
+ * Localised paths of a post in every language it exists in. A post may exist
+ * in only one language; the other language's switcher then goes to its blog list.
+ */
+export async function getTranslationPaths(
+  post: BlogPost,
+): Promise<Partial<Record<Locale, string>>> {
+  const slug = postSlug(post);
+  const all = await getCollection("blog", ({ data }) => !data.draft);
+  const ids = new Set(all.map(({ id }) => id));
+  return Object.fromEntries(
+    locales
+      .filter((lang) => ids.has(`${lang}/${slug}`))
+      .map((lang) => [lang, localizePath(postPath(post), lang)]),
+  );
 }

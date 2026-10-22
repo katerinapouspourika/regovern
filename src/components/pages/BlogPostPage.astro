@@ -1,0 +1,276 @@
+---
+/*
+ * Single blog post, shared by src/pages/blog/[slug].astro (Greek) and
+ * src/pages/en/blog/[slug].astro (English).
+ */
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+import BlogCard from "@/components/BlogCard.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon from "@/components/Icon.astro";
+import { formatDate, localizePath, toLocale, useTranslations } from "@/i18n";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  getPosts,
+  getTranslationPaths,
+  postPath,
+  type BlogPost,
+} from "@/utils/blog";
+import { readingMinutes } from "@/utils/reading-time";
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const locale = toLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const { Content } = await render(post);
+const translations = await getTranslationPaths(post);
+const minutes = readingMinutes(post.body ?? "");
+const morePosts = (await getPosts(locale))
+  .filter(({ id }) => id !== post.id)
+  .slice(0, 3);
+const blogPath = localizePath("/blog/", locale);
+---
+
+<BaseLayout
+  title={`${post.data.title} | ReGovern`}
+  description={post.data.description}
+  alternates={translations}
+  languageFallback="/blog/"
+>
+  <article>
+    <header class="post-header">
+      <div class="container narrow">
+        <nav aria-label={t("breadcrumb.label")}>
+          <ol class="breadcrumb">
+            <li>
+              <a href={localizePath("/", locale)}>{t("nav.home")}</a>
+            </li>
+            <li>
+              <a href={blogPath}>{t("nav.blog")}</a>
+            </li>
+            <li aria-current="page">{post.data.title}</li>
+          </ol>
+        </nav>
+        <h1>{post.data.title}</h1>
+        <p class="description">{post.data.description}</p>
+        <p class="meta">
+          <span class="visually-hidden">{t("blog.published")}:</span>
+          <time datetime={post.data.date.toISOString().slice(0, 10)}>
+            {formatDate(post.data.date, locale)}
+          </time>
+          <span aria-hidden="true">·</span>
+          {t("blog.readingTime").replace("{minutes}", String(minutes))}
+        </p>
+      </div>
+    </header>
+
+    <div class="container cover-wrap">
+      <Image
+        class="cover"
+        src={post.data.cover}
+        alt={post.data.coverAlt}
+        widths={[768, 1280, 1920]}
+        sizes="(min-width: 75rem) 75rem, 100vw"
+        loading="eager"
+      />
+    </div>
+
+    <div class="container narrow prose">
+      <Content />
+    </div>
+
+    <div class="container narrow">
+      <a class="back" href={blogPath}>
+        <span class="back-icon">
+          <Icon name="arrow-right" size={18} />
+        </span>
+        {t("blog.back")}
+      </a>
+    </div>
+  </article>
+
+  {morePosts.length > 0 && (
+    <section class="more" aria-labelledby="more-title">
+      <div class="container">
+        <h2 id="more-title">{t("blog.more")}</h2>
+        <ul class="post-grid">
+          {morePosts.map((other) => (
+            <li>
+              <BlogCard
+                href={localizePath(postPath(other), locale)}
+                title={other.data.title}
+                description={other.data.description}
+                date={other.data.date}
+                cover={other.data.cover}
+                coverAlt={other.data.coverAlt}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  /* Comfortable line length for reading. */
+  .narrow {
+    max-inline-size: calc(46rem + 2 * var(--container-gutter));
+  }
+
+  .post-header {
+    padding-block: calc(var(--header-height) + var(--space-16)) var(--space-12);
+    background: linear-gradient(
+      to bottom,
+      var(--color-sky-100),
+      var(--color-white)
+    );
+
+    .narrow {
+      display: grid;
+      gap: var(--space-6);
+    }
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    list-style: none;
+
+    li + li::before {
+      margin-inline-end: var(--space-2);
+      content: "/";
+    }
+  }
+
+  h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .description {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-muted);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding-block-start: var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-teal-700);
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .cover-wrap {
+    margin-block-end: var(--space-16);
+  }
+
+  .cover {
+    inline-size: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    border-block-end: 2px solid var(--color-bronze-500);
+  }
+
+  /* Markdown content: elements come from the post file, so they need :global. */
+  .prose {
+    font-size: var(--font-size-lg);
+    line-height: 1.75;
+    color: var(--color-text);
+
+    > :global(* + *) {
+      margin-block-start: var(--space-6);
+    }
+
+    :global(h2) {
+      margin-block-start: var(--space-12);
+      font-size: var(--font-size-2xl);
+    }
+
+    :global(h3) {
+      margin-block-start: var(--space-8);
+    }
+
+    :global(ul),
+    :global(ol) {
+      padding-inline-start: var(--space-6);
+    }
+
+    :global(li + li) {
+      margin-block-start: var(--space-2);
+    }
+
+    :global(li::marker) {
+      color: var(--color-teal-700);
+    }
+
+    :global(blockquote) {
+      padding-inline-start: var(--space-6);
+      margin-inline: 0;
+      font-family: var(--font-serif);
+      font-size: var(--font-size-xl);
+      color: var(--color-ink);
+      border-inline-start: 3px solid var(--color-teal-500);
+    }
+  }
+
+  .back {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    margin-block: var(--space-16) var(--space-24);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  /* The arrow points back. */
+  .back-icon {
+    display: inline-flex;
+    rotate: 180deg;
+  }
+
+  .more {
+    padding-block: var(--space-24);
+    background: var(--color-mist-500);
+
+    h2 {
+      margin-block-end: var(--space-12);
+      color: var(--color-white);
+    }
+  }
+
+  .post-grid {
+    display: grid;
+    gap: var(--space-8);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    li {
+      display: grid;
+    }
+  }
+</style>

@@ -244,6 +244,19 @@ export const el = {
   "breadcrumb.label": "Διαδρομή πλοήγησης",
 
   "blog.readMore": "Διαβάστε περισσότερα",
+  // TODO(content): real Blog page text.
+  "blog.meta.title": "Blog | ReGovern",
+  "blog.meta.description":
+    "Άρθρα της ReGovern για τον εσωτερικό έλεγχο, τη διαχείριση κινδύνων, την κανονιστική συμμόρφωση και την εταιρική διακυβέρνηση.",
+  "blog.hero.title": "Blog",
+  "blog.hero.subtitle":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+  "blog.list.title": "Όλα τα άρθρα",
+  "blog.empty": "Δεν υπάρχουν ακόμη άρθρα.",
+  "blog.back": "Όλα τα άρθρα",
+  "blog.readingTime": "{minutes}′ ανάγνωση",
+  "blog.published": "Δημοσιεύθηκε",
+  "blog.more": "Περισσότερα άρθρα",
 } as const;
 
 export type UiKey = keyof typeof el;
